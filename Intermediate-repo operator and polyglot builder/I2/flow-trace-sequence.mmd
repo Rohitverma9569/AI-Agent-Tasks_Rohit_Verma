@@ -1,0 +1,45 @@
+sequenceDiagram
+    participant Client
+    participant MigrationController
+    participant MigrationService
+    participant MigrationStatusRepository
+    participant MigrationAuditLogRepository
+    participant MigrationCacheManager
+    participant MySQL
+    participant Redis
+
+    Client->>MigrationController: POST /bo-migration/v1/migrateUser
+    Note over MigrationController: @Valid MigrateUserRequest
+    MigrationController->>MigrationService: migrateUser(request)
+
+    alt userId provided
+        MigrationService->>MigrationStatusRepository: findByUserId(userId)
+    else ucc provided
+        MigrationService->>MigrationStatusRepository: findByUcc(ucc)
+    end
+    MigrationStatusRepository->>MySQL: SELECT migration_status
+    MySQL-->>MigrationStatusRepository: row or empty
+    MigrationStatusRepository-->>MigrationService: Optional MigrationStatus
+
+    alt existing status (update)
+        MigrationService->>MigrationService: createAuditLog(old, request)
+        MigrationService->>MigrationAuditLogRepository: save(auditLog)
+        MigrationAuditLogRepository->>MySQL: INSERT migration_audit_log
+        MigrationService->>MigrationService: update cluster fields
+        MigrationService->>MigrationStatusRepository: save(existingStatus)
+        MigrationStatusRepository->>MySQL: UPDATE migration_status
+        MigrationService->>MigrationCacheManager: update(old, new)
+        MigrationCacheManager->>Redis: HDEL + HSET migration:user-id, migration:ucc
+    else new status (create)
+        MigrationService->>MigrationStatusRepository: save(newStatus)
+        MigrationStatusRepository->>MySQL: INSERT migration_status
+        MigrationService->>MigrationService: createAuditLogForNew(status)
+        MigrationService->>MigrationAuditLogRepository: save(auditLog)
+        MigrationAuditLogRepository->>MySQL: INSERT migration_audit_log
+        MigrationService->>MigrationCacheManager: put(newStatus)
+        MigrationCacheManager->>Redis: HSET migration:user-id, migration:ucc
+    end
+
+    MigrationService-->>MigrationController: void
+    MigrationController->>MigrationController: ApiResponse.success(...)
+    MigrationController-->>Client: 200 OK

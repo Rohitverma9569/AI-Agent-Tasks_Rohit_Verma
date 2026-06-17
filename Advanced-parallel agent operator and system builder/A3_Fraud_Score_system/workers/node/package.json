@@ -1,0 +1,14 @@
+{
+  "name": "fraud-scoring-worker",
+  "version": "1.0.0",
+  "description": "Async transaction processor — consumes queue, invokes Rust engine",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

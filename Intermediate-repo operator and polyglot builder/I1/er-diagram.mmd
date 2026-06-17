@@ -1,0 +1,31 @@
+erDiagram
+    MIGRATION_STATUS {
+        bigint id PK
+        bigint user_id UK
+        varchar ucc UK
+        enum primary_cluster
+        enum secondary_cluster
+        boolean is_secondary_sync_allowed
+        timestamp created_at
+        timestamp updated_at
+    }
+    MIGRATION_AUDIT_LOG {
+        bigint id PK
+        bigint user_id
+        varchar ucc
+        varchar old_primary
+        varchar new_primary
+        varchar old_secondary
+        varchar new_secondary
+        enum action
+        varchar performed_by
+        timestamp performed_at
+    }
+    MIGRATION_DEFAULT_CONFIG {
+        bigint id PK
+        enum default_primary
+        enum default_secondary
+        boolean is_secondary_sync_allowed
+        enum global_flag
+        timestamp updated_at
+    }

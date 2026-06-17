@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+
+# Rust
+engines/rust/target/
+
+# Runtime
+data/
+*.db
+*.log
+
+# OS / IDE
+.DS_Store
+.idea/

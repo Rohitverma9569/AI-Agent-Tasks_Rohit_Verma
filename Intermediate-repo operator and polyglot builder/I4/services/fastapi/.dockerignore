@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Tests (not needed in image)
+tests/
+
+# Local / docs
+*.md
+.git/
+.gitignore
+Dockerfile
+.dockerignore
+
+# IDE
+.idea/
+.vscode/
+.DS_Store

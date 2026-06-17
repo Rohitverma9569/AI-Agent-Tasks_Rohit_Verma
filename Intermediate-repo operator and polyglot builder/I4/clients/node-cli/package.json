@@ -1,0 +1,13 @@
+{
+  "name": "currency-convert-cli",
+  "version": "1.0.0",
+  "description": "Node CLI client for the I4 currency conversion FastAPI service",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "convert": "node cli.js"
+  }
+}

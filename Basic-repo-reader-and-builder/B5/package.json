@@ -1,0 +1,27 @@
+{
+  "name": "transaction-service",
+  "version": "1.0.0",
+  "description": "Express transaction management service with in-memory storage",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "jest --verbose"
+  },
+  "keywords": ["express", "transactions", "api"],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/tests/**/*.test.js", "src/**/*.test.js"]
+  }
+}

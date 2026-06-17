@@ -1,0 +1,14 @@
+---
+name: nodejs-builder
+description: >-
+  Build and validate the Express transaction API in B5 with Jest tests, validation
+  middleware, and in-memory storage. Use when the user types /nodejs-builder or
+  asks to scaffold, run, or validate the B5 Node.js project.
+disable-model-invocation: true
+---
+
+# NodeJS Builder (slash command entry)
+
+Read and follow **`repo-reader-and-builder/B5/agent.md`** in full.
+
+The Express project lives in **`repo-reader-and-builder/B5/`**. Run validation with `npm test` and update **`validation-results.md`** with terminal evidence.

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "risk-score.schema.json",
+  "title": "RiskScore",
+  "type": "object",
+  "required": ["transaction_id", "risk_score", "score_value", "reasons"],
+  "properties": {
+    "transaction_id": { "type": "string", "format": "uuid" },
+    "risk_score": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
+    "score_value": { "type": "number", "minimum": 0, "maximum": 1 },
+    "reasons": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

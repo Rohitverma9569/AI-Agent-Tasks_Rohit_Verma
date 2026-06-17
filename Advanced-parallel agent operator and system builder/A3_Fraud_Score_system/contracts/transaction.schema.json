@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "transaction.schema.json",
+  "title": "Transaction",
+  "type": "object",
+  "required": ["user_id", "merchant_id", "amount", "currency"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "user_id": { "type": "string", "minLength": 1 },
+    "merchant_id": { "type": "string", "minLength": 1 },
+    "amount": { "type": "number", "exclusiveMinimum": 0 },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "status": {
+      "type": "string",
+      "enum": ["PENDING", "PROCESSING", "COMPLETED", "FAILED"]
+    },
+    "risk_score": {
+      "type": ["string", "null"],
+      "enum": ["LOW", "MEDIUM", "HIGH", null]
+    },
+    "score_value": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "reasons": { "type": ["array", "null"], "items": { "type": "string" } },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}
