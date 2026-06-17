@@ -10,10 +10,10 @@ disable-model-invocation: true
 
 # Bug Diagnosis (slash command entry)
 
-Read and follow **`repo operator and polyglot builder/I6/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
+Read and follow **`Intermediate-repo operator and polyglot builder/I6_Dockerize_and_run/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
 
 Execute the bug investigation for the repo path and bug description the user provides. If only a repo path is given, ask for the bug description and how to reproduce it.
 
-Write output to **`repo operator and polyglot builder/I6/bug-investigation-report.md`** only (single `.md` file).
+Write output to **`Intermediate-repo operator and polyglot builder/I6_Dockerize_and_run/bug-investigation-report.md`** only (single `.md` file).
 
 Apply code fixes in the **target repository** — not in I6. Do not commit unless the user explicitly asks.

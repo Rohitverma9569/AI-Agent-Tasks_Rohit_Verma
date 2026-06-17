@@ -12,7 +12,7 @@ disable-model-invocation: true
 # ER Diagram Agent
 
 > **Slash command:** `/er-diagram {repo-path}`
-> **Source of truth:** this file (`repo operator and polyglot builder/I1/agent.md`)
+> **Source of truth:** this file (`Intermediate-repo operator and polyglot builder/I1_ER_diagram_from_repo/agent.md`)
 > **Slash registration:** `.cursor/skills/er-diagram/SKILL.md` (required by Cursor for `/` menu — do not edit; it points here)
 
 ## Role
@@ -131,7 +131,7 @@ Evidence examples:
 
 ## Required Deliverables
 
-Create in **this directory** (`repo operator and polyglot builder/I1/`):
+Create in **this directory** (`Intermediate-repo operator and polyglot builder/I1_ER_diagram_from_repo/`):
 
 * `er-diagram-report.md`
 * `er-diagram.mmd`

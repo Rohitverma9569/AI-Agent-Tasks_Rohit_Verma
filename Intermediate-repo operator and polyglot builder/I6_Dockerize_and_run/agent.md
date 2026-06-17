@@ -11,7 +11,7 @@ disable-model-invocation: true
 # Bug Diagnosis Agent
 
 > **Slash command:** `/bug-diagnosis {repo-path} {bug-description}`
-> **Source of truth:** this file (`repo operator and polyglot builder/I6/agent.md`)
+> **Source of truth:** this file (`Intermediate-repo operator and polyglot builder/I6_Dockerize_and_run/agent.md`)
 > **Slash registration:** `.cursor/skills/bug-diagnosis/SKILL.md` (required by Cursor for `/` menu — do not edit; it points here)
 
 ## Role
@@ -76,9 +76,9 @@ Bug Diagnosis Progress:
 
 ## Deliverables
 
-Write to **`repo operator and polyglot builder/I6/bug-investigation-report.md`** (single `.md` file in I6).
+Write to **`Intermediate-repo operator and polyglot builder/I6_Dockerize_and_run/bug-investigation-report.md`** (single `.md` file in I6_Dockerize_and_run).
 
-Code fixes go in the **target repository** the user specifies — not in I6.
+Code fixes go in the **target repository** the user specifies — not in I6_Dockerize_and_run.
 
 ## Required Sections (bug-investigation-report.md)
 
@@ -228,6 +228,6 @@ If only a repo path is given, ask for the bug description and reproduction steps
 
 | Agent | When to use |
 | ----- | ----------- |
-| **I2 Flow trace** | Understand call chain before debugging |
-| **I3 Small safe change** | Known small change without full RCA |
-| **I6 Bug diagnosis** | Unknown bug — reproduce, RCA, fix, prove |
+| **I2_End_to_end_flow_trace** | Understand call chain before debugging |
+| **I3_Small_safe_change** | Known small change without full RCA |
+| **I6_Dockerize_and_run** | Unknown bug — reproduce, RCA, fix, prove |

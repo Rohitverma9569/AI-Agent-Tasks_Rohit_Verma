@@ -11,7 +11,7 @@ disable-model-invocation: true
 # Small Safe Change Agent
 
 > **Slash command:** `/small-safe-change {repo-path} {change-description}`
-> **Source of truth:** this file (`repo operator and polyglot builder/I3/agent.md`)
+> **Source of truth:** this file (`Intermediate-repo operator and polyglot builder/I3_Small_safe_change/agent.md`)
 > **Slash registration:** `.cursor/skills/small-safe-change/SKILL.md` (required by Cursor for `/` menu — do not edit; it points here)
 
 ## Role
@@ -108,7 +108,7 @@ Capture for **Execution** section:
 
 ### Step 6: Write change-report.md
 
-Create **`repo operator and polyglot builder/I3/change-report.md`**.
+Create **`Intermediate-repo operator and polyglot builder/I3_Small_safe_change/change-report.md`**.
 
 All content in a **single `.md` file** — no separate `.mmd` or other output files. Embed Mermaid or code blocks inline only if needed.
 

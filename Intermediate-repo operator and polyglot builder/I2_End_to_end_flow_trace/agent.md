@@ -12,7 +12,7 @@ disable-model-invocation: true
 # End-to-End Flow Trace Agent
 
 > **Slash command:** `/flow-trace {repo-path} {entry-point}`
-> **Source of truth:** this file (`repo operator and polyglot builder/I2/agent.md`)
+> **Source of truth:** this file (`Intermediate-repo operator and polyglot builder/I2_End_to_end_flow_trace/agent.md`)
 > **Slash registration:** `.cursor/skills/flow-trace/SKILL.md` (required by Cursor for `/` menu — do not edit; it points here)
 
 ## Role
@@ -127,7 +127,7 @@ For Spring, also check:
 
 ### Step 5: Write flow-trace-report.md
 
-Create **`repo operator and polyglot builder/I2/flow-trace-report.md`**.
+Create **`Intermediate-repo operator and polyglot builder/I2_End_to_end_flow_trace/flow-trace-report.md`**.
 
 Use this structure:
 
@@ -211,7 +211,7 @@ See [flow-trace-sequence.mmd](./flow-trace-sequence.mmd) for the full diagram.
 
 ### Step 6: Write flow-trace-sequence.mmd
 
-Create **`repo operator and polyglot builder/I2/flow-trace-sequence.mmd`** with valid Mermaid `sequenceDiagram` syntax.
+Create **`Intermediate-repo operator and polyglot builder/I2_End_to_end_flow_trace/flow-trace-sequence.mmd`** with valid Mermaid `sequenceDiagram` syntax.
 
 Rules:
 

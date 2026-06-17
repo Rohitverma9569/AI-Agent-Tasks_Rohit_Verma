@@ -63,7 +63,7 @@ pytest -v
 
 ## Docker
 
-Multi-stage image with built-in health check. See `I5/docker-report.md` for full layer breakdown.
+Multi-stage image with built-in health check. See `I5_Polyglot_service_pair/docker-report.md` for full layer breakdown.
 
 ### docker build
 

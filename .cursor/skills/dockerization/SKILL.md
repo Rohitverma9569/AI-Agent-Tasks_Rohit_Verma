@@ -9,9 +9,9 @@ disable-model-invocation: true
 
 # Dockerization (slash command entry)
 
-Read and follow **`repo operator and polyglot builder/I5/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
+Read and follow **`Intermediate-repo operator and polyglot builder/I5_Polyglot_service_pair/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
 
-Containerize the service path the user provides (or default to I4 FastAPI if unclear). Write output to **`repo operator and polyglot builder/I5/docker-report.md`**.
+Containerize the service path the user provides (or default to I4 FastAPI if unclear). Write output to **`Intermediate-repo operator and polyglot builder/I5_Polyglot_service_pair/docker-report.md`**.
 
 Place `Dockerfile` and `.dockerignore` alongside the containerized service.
 

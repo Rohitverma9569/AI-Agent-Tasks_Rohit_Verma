@@ -1,6 +1,6 @@
 # Validation Results
 
-> **Project:** `repo-reader-and-builder/B5`
+> **Project:** `Basic-repo-reader-and-builder/B5_Node.js_greenfield_API`
 > **Generated:** 2026-06-17
 > **Method:** Executed npm install, npm test, and npm start + curl.
 
@@ -11,7 +11,7 @@
 **Command:**
 
 ```bash
-cd repo-reader-and-builder/B5
+cd Basic-repo-reader-and-builder/B5_Node.js_greenfield_API
 npm install
 ```
 

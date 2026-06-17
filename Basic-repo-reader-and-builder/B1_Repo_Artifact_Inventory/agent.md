@@ -12,7 +12,7 @@ disable-model-invocation: true
 # Repo Inventory Agent
 
 > **Slash command:** `/repo-inventory {repo-path}`
-> **Source of truth:** this file (`repo-reader-and-builder/B1/agent.md`)
+> **Source of truth:** this file (`Basic-repo-reader-and-builder/B1_Repo_Artifact_Inventory/agent.md`)
 > **Slash registration:** `.cursor/skills/repo-inventory/SKILL.md` (required by Cursor for `/` menu — do not edit; it points here)
 
 ## Role
@@ -121,7 +121,7 @@ Do not copy README claims without source confirmation.
 
 ### Step 5: Write output
 
-Create `repo-inventory.md` in the **same directory as this skill** (`repo-reader-and-builder/B1/repo-inventory.md`).
+Create `repo-inventory.md` in the **same directory as this skill** (`Basic-repo-reader-and-builder/B1_Repo_Artifact_Inventory/repo-inventory.md`).
 
 If the user specifies a different path, write there instead.
 

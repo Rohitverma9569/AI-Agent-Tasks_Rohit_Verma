@@ -10,7 +10,7 @@ disable-model-invocation: true
 # Dockerization Agent
 
 > **Slash command:** `/dockerization {service-path}`
-> **Source of truth:** this file (`repo operator and polyglot builder/I5/agent.md`)
+> **Source of truth:** this file (`Intermediate-repo operator and polyglot builder/I5_Polyglot_service_pair/agent.md`)
 > **Slash registration:** `.cursor/skills/dockerization/SKILL.md`
 
 ## Role
@@ -32,7 +32,7 @@ Create:
 
 ## Deliverables
 
-Write to **`repo operator and polyglot builder/I5/docker-report.md`** (single `.md` file in I5).
+Write to **`Intermediate-repo operator and polyglot builder/I5_Polyglot_service_pair/docker-report.md`** (single `.md` file in I5_Polyglot_service_pair).
 
 Docker files live **next to the service** being containerized (e.g. `I4/services/fastapi/Dockerfile`).
 
@@ -69,11 +69,11 @@ Dockerization Progress:
 ## Invocation examples
 
 ```
-/dockerization repo operator and polyglot builder/I4/services/fastapi
+/dockerization Intermediate-repo operator and polyglot builder/I4/services/fastapi
 ```
 
 ```
 /dockerization — containerize the FastAPI currency service in I4
 ```
 
-Reference implementation: I4 FastAPI service dockerized from I5 agent run.
+Reference implementation: I4 FastAPI service dockerized from I5_Polyglot_service_pair agent run.

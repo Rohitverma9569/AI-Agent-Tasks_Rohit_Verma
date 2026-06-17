@@ -11,7 +11,7 @@ disable-model-invocation: true
 # Test Discovery Agent
 
 > **Slash command:** `/test-discovery {repo-path}`
-> **Source of truth:** this file (`repo-reader-and-builder/B3/agent.md`)
+> **Source of truth:** this file (`Basic-repo-reader-and-builder/B3_Test_discovery_and_execution/agent.md`)
 > **Slash registration:** `.cursor/skills/test-discovery/SKILL.md` (required by Cursor for `/` menu — do not edit; it points here)
 
 ## Role
@@ -159,7 +159,7 @@ If all tests pass, write `_No failures._`
 
 ### Step 7: Write output
 
-Create `test-discovery-report.md` in the **same directory as this agent** (`repo-reader-and-builder/B3/test-discovery-report.md`).
+Create `test-discovery-report.md` in the **same directory as this agent** (`Basic-repo-reader-and-builder/B3_Test_discovery_and_execution/test-discovery-report.md`).
 
 If the user specifies a different path, write there instead.
 

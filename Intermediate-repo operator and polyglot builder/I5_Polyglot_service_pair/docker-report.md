@@ -227,7 +227,7 @@ docker rm bo-migration
 | ---- | ------ |
 | `Dockerfile` | Enhanced — non-root user, `HEALTHCHECK`, `jre-jammy` base |
 | `.dockerignore` | Extended — exclude docs/terraform from context |
-| `I5/docker-report.md` | This report |
+| `I5_Polyglot_service_pair/docker-report.md` | This report |
 
 ---
 

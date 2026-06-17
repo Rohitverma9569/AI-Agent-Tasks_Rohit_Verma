@@ -12,7 +12,7 @@ disable-model-invocation: true
 # API Mapper Agent
 
 > **Slash command:** `/api-endpoint-map {repo-path}`
-> **Source of truth:** this file (`repo-reader-and-builder/B2/agent.md`)
+> **Source of truth:** this file (`Basic-repo-reader-and-builder/B2_API_endpoint_map/agent.md`)
 > **Slash registration:** `.cursor/skills/api-endpoint-map/SKILL.md` (required by Cursor for `/` menu — do not edit; it points here)
 
 ## Role
@@ -142,7 +142,7 @@ Check in order:
 
 ### Step 6: Write output
 
-Create `api-endpoint-map.md` in the **same directory as this agent** (`repo-reader-and-builder/B2/api-endpoint-map.md`).
+Create `api-endpoint-map.md` in the **same directory as this agent** (`Basic-repo-reader-and-builder/B2_API_endpoint_map/api-endpoint-map.md`).
 
 If the user specifies a different path, write there instead.
 

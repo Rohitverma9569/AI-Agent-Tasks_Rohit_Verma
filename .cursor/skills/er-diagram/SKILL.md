@@ -11,11 +11,11 @@ disable-model-invocation: true
 
 # ER Diagram (slash command entry)
 
-Read and follow **`repo operator and polyglot builder/I1/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
+Read and follow **`Intermediate-repo operator and polyglot builder/I1_ER_diagram_from_repo/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
 
 Execute the schema/ER analysis for the path the user provides (or ask for one if missing). Write output to:
 
-- **`repo operator and polyglot builder/I1/er-diagram-report.md`**
-- **`repo operator and polyglot builder/I1/er-diagram.mmd`**
+- **`Intermediate-repo operator and polyglot builder/I1_ER_diagram_from_repo/er-diagram-report.md`**
+- **`Intermediate-repo operator and polyglot builder/I1_ER_diagram_from_repo/er-diagram.mmd`**
 
 unless the user specifies different paths.

@@ -9,6 +9,6 @@ disable-model-invocation: true
 
 # NodeJS Builder (slash command entry)
 
-Read and follow **`repo-reader-and-builder/B5/agent.md`** in full.
+Read and follow **`Basic-repo-reader-and-builder/B5_Node.js_greenfield_API/agent.md`** in full.
 
-The Express project lives in **`repo-reader-and-builder/B5/`**. Run validation with `npm test` and update **`validation-results.md`** with terminal evidence.
+The Express project lives in **`Basic-repo-reader-and-builder/B5_Node.js_greenfield_API/`**. Run validation with `npm test` and update **`validation-results.md`** with terminal evidence.

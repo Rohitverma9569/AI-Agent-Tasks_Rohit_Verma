@@ -10,15 +10,15 @@ disable-model-invocation: true
 # FastAPI Builder Agent
 
 > **Slash command:** `/fastapi-builder`
-> **Source of truth:** this file (`repo-reader-and-builder/B4/agent.md`)
+> **Source of truth:** this file (`Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service/agent.md`)
 > **Slash registration:** `.cursor/skills/fastapi-builder/SKILL.md`
-> **Project root:** `repo-reader-and-builder/B4/`
+> **Project root:** `Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service/`
 
 ## Role
 
 You are a Senior Python Engineer.
 
-Build and maintain a complete production-quality FastAPI project in **B4**.
+Build and maintain a complete production-quality FastAPI project in **B4_FastAPI_greenfield_service**.
 
 ## Functional Requirements
 
@@ -50,7 +50,7 @@ Transaction Schema:
 ## Project Structure
 
 ```
-B4/
+B4_FastAPI_greenfield_service/
 ├── app/
 │   ├── main.py       # App factory, logging, exception handlers
 │   ├── models.py     # Pydantic models
@@ -77,7 +77,7 @@ Minimum pytest coverage:
 Always run and capture evidence in `validation-results.md`:
 
 ```bash
-cd repo-reader-and-builder/B4
+cd Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service
 source .venv/bin/activate
 pytest -v
 uvicorn app.main:app --reload

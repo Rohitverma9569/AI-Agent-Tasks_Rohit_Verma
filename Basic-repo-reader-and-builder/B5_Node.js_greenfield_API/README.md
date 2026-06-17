@@ -24,7 +24,7 @@ Express.js transaction management API with in-memory storage, validation middlew
 ## Project structure
 
 ```
-B5/
+B5_Node.js_greenfield_API/
 ├── src/
 │   ├── index.js              # Server entry
 │   ├── app.js                # Express app factory
@@ -47,7 +47,7 @@ B5/
 ## Setup
 
 ```bash
-cd repo-reader-and-builder/B5
+cd Basic-repo-reader-and-builder/B5_Node.js_greenfield_API
 npm install
 ```
 

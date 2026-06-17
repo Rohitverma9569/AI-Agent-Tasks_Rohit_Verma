@@ -26,7 +26,7 @@ Production-quality FastAPI service with in-memory transaction storage.
 ## Project structure
 
 ```
-B4/
+B4_FastAPI_greenfield_service/
 ├── app/
 │   ├── main.py       # FastAPI app, logging, error handlers
 │   ├── models.py     # Pydantic models
@@ -42,7 +42,7 @@ B4/
 ## Setup
 
 ```bash
-cd repo-reader-and-builder/B4
+cd Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt

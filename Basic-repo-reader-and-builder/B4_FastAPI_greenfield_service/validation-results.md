@@ -1,6 +1,6 @@
 # Validation Results
 
-> **Project:** `repo-reader-and-builder/B4`
+> **Project:** `Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service`
 > **Generated:** 2026-06-17
 > **Method:** Executed pytest and live uvicorn + curl.
 
@@ -11,7 +11,7 @@
 **Command:**
 
 ```bash
-cd repo-reader-and-builder/B4
+cd Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service
 source .venv/bin/activate
 pytest -v
 ```
@@ -43,7 +43,7 @@ tests/test_transactions.py::test_create_transaction_default_timestamp PASSED
 **Command:**
 
 ```bash
-cd repo-reader-and-builder/B4
+cd Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service
 source .venv/bin/activate
 uvicorn app.main:app --host 127.0.0.1 --port 8765
 ```

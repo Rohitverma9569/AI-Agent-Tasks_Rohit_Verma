@@ -10,15 +10,15 @@ disable-model-invocation: true
 # NodeJS Builder Agent
 
 > **Slash command:** `/nodejs-builder`
-> **Source of truth:** this file (`repo-reader-and-builder/B5/agent.md`)
+> **Source of truth:** this file (`Basic-repo-reader-and-builder/B5_Node.js_greenfield_API/agent.md`)
 > **Slash registration:** `.cursor/skills/nodejs-builder/SKILL.md`
-> **Project root:** `repo-reader-and-builder/B5/`
+> **Project root:** `Basic-repo-reader-and-builder/B5_Node.js_greenfield_API/`
 
 ## Role
 
 You are a Senior NodeJS Engineer.
 
-Build and maintain a complete transaction management service in **B5**.
+Build and maintain a complete transaction management service in **B5_Node.js_greenfield_API**.
 
 ## Functional Requirements
 
@@ -52,7 +52,7 @@ tests/
 Always run and capture evidence in `validation-results.md`:
 
 ```bash
-cd repo-reader-and-builder/B5
+cd Basic-repo-reader-and-builder/B5_Node.js_greenfield_API
 npm install
 npm test
 npm start

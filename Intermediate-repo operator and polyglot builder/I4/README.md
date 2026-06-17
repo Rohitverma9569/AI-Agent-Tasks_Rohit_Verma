@@ -57,7 +57,7 @@ flowchart LR
 ### Terminal 1 — Start FastAPI
 
 ```bash
-cd "repo operator and polyglot builder/I4/services/fastapi"
+cd "Intermediate-repo operator and polyglot builder/I4/services/fastapi"
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -69,7 +69,7 @@ Wait for: `Uvicorn running on http://127.0.0.1:8000`
 ### Terminal 2 — Run Node CLI
 
 ```bash
-cd "repo operator and polyglot builder/I4/clients/node-cli"
+cd "Intermediate-repo operator and polyglot builder/I4/clients/node-cli"
 node cli.js 100 USD INR
 ```
 

@@ -10,9 +10,9 @@ disable-model-invocation: true
 
 # Polyglot Service Pair (slash command entry)
 
-Read and follow **`repo operator and polyglot builder/I4/agent.md`** in full — that file is the source of truth for workflow, rules, and deliverables.
+Read and follow **`Intermediate-repo operator and polyglot builder/I4/agent.md`** in full — that file is the source of truth for workflow, rules, and deliverables.
 
-The reference implementation is in **`repo operator and polyglot builder/I4/`** with:
+The reference implementation is in **`Intermediate-repo operator and polyglot builder/I4/`** with:
 
 - `services/fastapi/` — conversion API
 - `clients/node-cli/` — Node CLI

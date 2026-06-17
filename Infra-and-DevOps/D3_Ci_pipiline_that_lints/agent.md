@@ -8,10 +8,10 @@ description: >-
 disable-model-invocation: true
 ---
 
-# CI Pipeline Agent (B3)
+# CI Pipeline Agent (D3)
 
 > **Slash command:** `/ci-pipeline [{target-path}] [{github|gitlab}]`
-> **Source of truth:** this file (`Infra-and-DevOps/B3_Ci_pipiline_that_lints/agent.md`)
+> **Source of truth:** this file (`Infra-and-DevOps/D3_Ci_pipiline_that_lints/agent.md`)
 > **Slash registration:** `.cursor/skills/ci-pipeline/SKILL.md`
 
 ## Role
@@ -32,9 +32,9 @@ Pipeline must be **executable** with proof of success, intentional failure, and 
 
 | Artifact | Location |
 | -------- | -------- |
-| Agent spec | `Infra-and-DevOps/B3_Ci_pipiline_that_lints/agent.md` |
+| Agent spec | `Infra-and-DevOps/D3_Ci_pipiline_that_lints/agent.md` |
 | Pipeline files | `{target-path}/` (user repo) |
-| Report | `Infra-and-DevOps/B3_Ci_pipiline_that_lints/docs/ci-pipeline-report.md` |
+| Report | `Infra-and-DevOps/D3_Ci_pipiline_that_lints/docs/ci-pipeline-report.md` |
 
 ## Platform options
 
@@ -153,7 +153,7 @@ If `act` unavailable, document equivalent:
 
 ## Report format
 
-Write `Infra-and-DevOps/B3_Ci_pipiline_that_lints/docs/ci-pipeline-report.md`:
+Write `Infra-and-DevOps/D3_Ci_pipiline_that_lints/docs/ci-pipeline-report.md`:
 
 ```markdown
 # CI Pipeline Report
@@ -161,72 +161,18 @@ Write `Infra-and-DevOps/B3_Ci_pipiline_that_lints/docs/ci-pipeline-report.md`:
 > **Target:** `{target-path}`
 > **Platform:** GitHub Actions | GitLab CI
 > **Generated:** {YYYY-MM-DD}
-> **Agent:** B3 — CI Pipeline
+> **Agent:** D3 — CI Pipeline
 
 ---
 
 ## Pipeline Summary
-
-{Stages, triggers, commands per stage}
-
----
-
 ## Workflow YAML
-
-{Path + key excerpts or full file reference}
-
----
-
 ## Cache Configuration
-
-{What is cached, keys, paths}
-
----
-
 ## Matrix Strategy
-
-{Matrix jobs or "Single job — reason"}
-
----
-
 ## Verification — Success Run
-
-| Field | Value |
-| ----- | ----- |
-| Command | act push / manual steps |
-| Exit code | |
-| Output | |
-
----
-
 ## Failure Demo
-
-| Field | Value |
-| ----- | ----- |
-| Intentional change | |
-| Command | |
-| Exit code | |
-| Failing output | |
-| Pipeline behaviour | |
-
----
-
 ## Recovery — Green Run
-
-| Field | Value |
-| ----- | ----- |
-| Fix applied | |
-| Command | |
-| Exit code | |
-| Output | |
-
----
-
-## Risks and Assumptions
-
-### Verified
-### Inferred
-### Unknown
+## Risks and Assumptions (Verified / Inferred / Unknown)
 ```
 
 ## Rules

@@ -11,13 +11,13 @@ disable-model-invocation: true
 
 # Flow Trace (slash command entry)
 
-Read and follow **`repo operator and polyglot builder/I2/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
+Read and follow **`Intermediate-repo operator and polyglot builder/I2_End_to_end_flow_trace/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
 
 Execute the end-to-end flow trace for the repo path and entry point the user provides. If only a repo path is given, list discovered entry points and ask which one to trace.
 
 Write output to:
 
-- **`repo operator and polyglot builder/I2/flow-trace-report.md`**
-- **`repo operator and polyglot builder/I2/flow-trace-sequence.mmd`**
+- **`Intermediate-repo operator and polyglot builder/I2_End_to_end_flow_trace/flow-trace-report.md`**
+- **`Intermediate-repo operator and polyglot builder/I2_End_to_end_flow_trace/flow-trace-sequence.mmd`**
 
 unless the user specifies different paths.

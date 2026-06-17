@@ -10,6 +10,6 @@ disable-model-invocation: true
 
 # Test Discovery (slash command entry)
 
-Read and follow **`repo-reader-and-builder/B3/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
+Read and follow **`Basic-repo-reader-and-builder/B3_Test_discovery_and_execution/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
 
-Execute test discovery and run tests for the path the user provides (or ask for one if missing). Write output to **`repo-reader-and-builder/B3/test-discovery-report.md`** unless the user specifies another path.
+Execute test discovery and run tests for the path the user provides (or ask for one if missing). Write output to **`Basic-repo-reader-and-builder/B3_Test_discovery_and_execution/test-discovery-report.md`** unless the user specifies another path.

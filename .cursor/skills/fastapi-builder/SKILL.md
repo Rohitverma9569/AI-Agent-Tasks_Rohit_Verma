@@ -9,6 +9,6 @@ disable-model-invocation: true
 
 # FastAPI Builder (slash command entry)
 
-Read and follow **`repo-reader-and-builder/B4/agent.md`** in full.
+Read and follow **`Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service/agent.md`** in full.
 
-The FastAPI project lives in **`repo-reader-and-builder/B4/`**. Run validation with `pytest -v` and update **`validation-results.md`** with terminal evidence.
+The FastAPI project lives in **`Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service/`**. Run validation with `pytest -v` and update **`validation-results.md`** with terminal evidence.

@@ -11,6 +11,6 @@ disable-model-invocation: true
 
 # Repo Inventory (slash command entry)
 
-Read and follow **`repo-reader-and-builder/B1/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
+Read and follow **`Basic-repo-reader-and-builder/B1_Repo_Artifact_Inventory/agent.md`** in full — that file is the source of truth for workflow, rules, and output format.
 
-Execute the repo scan for the path the user provides (or ask for one if missing). Write output to **`repo-reader-and-builder/B1/repo-inventory.md`** unless the user specifies another path.
+Execute the repo scan for the path the user provides (or ask for one if missing). Write output to **`Basic-repo-reader-and-builder/B1_Repo_Artifact_Inventory/repo-inventory.md`** unless the user specifies another path.

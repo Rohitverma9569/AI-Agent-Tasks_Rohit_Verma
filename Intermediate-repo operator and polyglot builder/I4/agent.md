@@ -11,7 +11,7 @@ disable-model-invocation: true
 # Polyglot Service Pair Agent
 
 > **Slash command:** `/polyglot-service-pair`
-> **Source of truth:** this file (`repo operator and polyglot builder/I4/agent.md`)
+> **Source of truth:** this file (`Intermediate-repo operator and polyglot builder/I4/agent.md`)
 > **Slash registration:** `.cursor/skills/polyglot-service-pair/SKILL.md`
 
 ## Role
