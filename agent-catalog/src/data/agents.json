@@ -1,0 +1,851 @@
+{
+  "categories": [
+    {
+      "id": "basic",
+      "label": "Basic",
+      "subtitle": "Repo Reader & Builder",
+      "dir": "Basic-repo-reader-and-builder",
+      "accent": "#3b82f6"
+    },
+    {
+      "id": "intermediate",
+      "label": "Intermediate",
+      "subtitle": "Polyglot Builder",
+      "dir": "Intermediate-repo operator and polyglot builder",
+      "accent": "#10b981"
+    },
+    {
+      "id": "advanced",
+      "label": "Advanced",
+      "subtitle": "Parallel Agent Operator",
+      "dir": "Advanced-parallel agent operator and system builder",
+      "accent": "#8b5cf6"
+    },
+    {
+      "id": "devops",
+      "label": "DevOps",
+      "subtitle": "Infra & Platform",
+      "dir": "Infra-and-DevOps",
+      "accent": "#f59e0b"
+    }
+  ],
+  "agents": [
+    {
+      "id": "multi-worktree-plan",
+      "code": "A1",
+      "title": "Multi Worktree Planning",
+      "name": "multi-worktree-plan",
+      "description": "Decompose a feature, bug fix, or migration into independent parallel workstreams with branch strategy, agent prompts per lane, merge order, and conflict prevention. Use when the user types /multi-worktree-plan or asks to split work across worktrees, parallel agents, or multi-branch delivery.",
+      "slashCommand": "/multi-worktree-plan {repo-path} {task-description}",
+      "skillPath": ".cursor/skills/multi-worktree-plan/SKILL.md",
+      "category": "advanced",
+      "path": "Advanced-parallel agent operator and system builder/A1_Multi-worktree_parallel_plan",
+      "agentFile": "Advanced-parallel agent operator and system builder/A1_Multi-worktree_parallel_plan/agent.md",
+      "role": "You are a Principal Engineer responsible for safely decomposing work across multiple coding agents.",
+      "objective": "Take a feature, analysis task, migration, bug fix, or enhancement and split it into **independent parallel workstreams** with minimal merge conflicts.",
+      "tasks": [],
+      "rules": [
+        "Optimize for **parallel execution** — lanes must be independently workable.",
+        "**Minimize merge conflicts** — separate files per lane where possible.",
+        "**Explicitly identify shared files** — flag high-risk overlap upfront.",
+        "**No vague decomposition** — every lane has concrete files, branch name, and agent prompt.",
+        "One plan per report. Do not merge unrelated features.",
+        "Read the target repo before planning — base file lists on actual codebase structure.",
+        "Do not create worktrees or branches unless the user explicitly asks — **plan only** by default."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/multi-worktree-plan ~/Downloads/bo-migration-service Add bulk export API for migration status",
+        "/multi-worktree-plan ~/my-app Refactor auth module to JWT — split across contract, service, and tests",
+        "/multi-worktree-plan ~/my-app — user describes task in follow-up"
+      ]
+    },
+    {
+      "id": "parallel-worktree-execute",
+      "code": "A2",
+      "title": "Parallel Worktree Execution",
+      "name": "parallel-worktree-execute",
+      "description": "Create two or more git worktrees, execute independent lane changes in parallel, reconcile merges, and verify with build/test/lint evidence. Produces a parallel-execution-report. Use when the user types /parallel-worktree-execute or asks to run parallel worktrees, execute lanes, or merge parallel branches.",
+      "slashCommand": "/parallel-worktree-execute {repo-path} {plan-or-task}",
+      "skillPath": ".cursor/skills/parallel-worktree-execute/SKILL.md",
+      "category": "advanced",
+      "path": "Advanced-parallel agent operator and system builder/A2_Execute_two_parallel_worktrees",
+      "agentFile": "Advanced-parallel agent operator and system builder/A2_Execute_two_parallel_worktrees/agent.md",
+      "role": "You are a Principal Engineer executing parallel development safely.",
+      "objective": "Create **two or more worktrees**, perform independent changes per lane, reconcile them cleanly, and verify the integrated result.",
+      "tasks": [],
+      "rules": [
+        "**Keep evidence for all actions** — paste exact git commands and output.",
+        "**Document exact git commands** — no paraphrased history.",
+        "**Never claim merge success without verification** — run build + tests after merge.",
+        "**Minimal changes per lane** — follow lane scope from the plan.",
+        "**Two lanes minimum** — default to Lane 1 + Lane 2 from A1 plan when available.",
+        "Do not commit or push unless the user explicitly asks.",
+        "Do not force-push to `main`/`master`."
+      ],
+      "deliverables": [
+        {
+          "path": "Output",
+          "purpose": "Location"
+        },
+        {
+          "path": "Execution report",
+          "purpose": "`A2_Execute_two_parallel_worktrees/parallel-execution-report.md`"
+        },
+        {
+          "path": "Code changes",
+          "purpose": "Target repository worktrees only"
+        }
+      ],
+      "invocation": [
+        "/parallel-worktree-execute ~/Downloads/bo-migration-service — execute Lane A and Lane B from A1 export plan",
+        "/parallel-worktree-execute ~/Downloads/bo-migration-service Execute contract lane + repository lane for bulk export API",
+        "/parallel-worktree-execute ~/my-app Lane 1: add health endpoint, Lane 2: add metrics config"
+      ]
+    },
+    {
+      "id": "fraud-score-system",
+      "code": "A3",
+      "title": "Polyglot System Builder Agent (A3)",
+      "name": "fraud-score-system",
+      "description": "Build a three-component fraud scoring system — FastAPI API, Node worker, Rust risk engine. Produces services/, workers/, engines/, docs, and tests. Use when the user asks for polyglot fraud scoring or A3 fraud system.",
+      "slashCommand": "/fraud-score-system",
+      "skillPath": "",
+      "category": "advanced",
+      "path": "Advanced-parallel agent operator and system builder/A3_Fraud_Score_system",
+      "agentFile": "Advanced-parallel agent operator and system builder/A3_Fraud_Score_system/agent.md",
+      "role": "Staff Distributed Systems Engineer.",
+      "objective": "Fraud scoring system across FastAPI, Node.js, and Rust with clear contracts and separated responsibilities.",
+      "tasks": [],
+      "rules": [
+        "Clear contracts in `contracts/`",
+        "Separate responsibilities per component",
+        "FastAPI tests, Rust tests, integration tests required",
+        "Capture execution proof with real command output"
+      ],
+      "deliverables": [
+        {
+          "path": "services/fastapi/",
+          "purpose": "`POST /transactions`, queue publish"
+        },
+        {
+          "path": "workers/node/",
+          "purpose": "Async consumer, Rust invocation, result storage"
+        },
+        {
+          "path": "engines/rust/",
+          "purpose": "`LOW` / `MEDIUM` / `HIGH` scoring"
+        },
+        {
+          "path": "contracts/",
+          "purpose": "JSON schemas"
+        },
+        {
+          "path": "docs/architecture.md",
+          "purpose": "Diagrams + integration flow"
+        },
+        {
+          "path": "README.md",
+          "purpose": "Run order + setup"
+        },
+        {
+          "path": "validation-results.md",
+          "purpose": "Execution proof"
+        }
+      ],
+      "invocation": []
+    },
+    {
+      "id": "repository-modernization",
+      "code": "A4",
+      "title": "Repository Modernization Agent (A4)",
+      "name": "repository-modernization",
+      "description": "Analyze a repository and produce a modernization roadmap with impact/effort/risk scoring, then implement the highest-value lowest-risk improvement. Use when the user types /repository-modernization or asks for modernization plan, tech debt roadmap, or pragmatic repo improvements.",
+      "slashCommand": "/repository-modernization {repo-path}",
+      "skillPath": ".cursor/skills/repository-modernization/SKILL.md",
+      "category": "advanced",
+      "path": "Advanced-parallel agent operator and system builder/A4_Repository_Modernization_Plan",
+      "agentFile": "Advanced-parallel agent operator and system builder/A4_Repository_Modernization_Plan/agent.md",
+      "role": "Principal Software Architect.",
+      "objective": "Analyze a repository, propose a modernization roadmap, and **implement** the highest-value lowest-risk improvement.",
+      "tasks": [],
+      "rules": [
+        "Evidence required — cite file paths.",
+        "Prioritize pragmatically (impact / effort / risk scoring).",
+        "Avoid speculative recommendations.",
+        "Implement exactly **one** first improvement (HV/LR).",
+        "Run build + tests + lint where applicable; capture outputs.",
+        "Document rollback steps.",
+        "Do not commit unless user asks."
+      ],
+      "deliverables": [
+        {
+          "path": "Output",
+          "purpose": "Location"
+        },
+        {
+          "path": "Modernization report",
+          "purpose": "`A4_Repository_Modernization_Plan/docs/modernization-report.md`"
+        },
+        {
+          "path": "Code improvement",
+          "purpose": "Target repository (scoped change only)"
+        }
+      ],
+      "invocation": [
+        "/repository-modernization ../A3_Fraud_Score_system",
+        "/repository-modernization ~/Downloads/bo-migration-service"
+      ]
+    },
+    {
+      "id": "adversarial-code-review",
+      "code": "A5",
+      "title": "Adversarial Code Review Agent (A5)",
+      "name": "adversarial-code-review",
+      "description": "Perform a skeptical adversarial review of AI-generated or unfamiliar code. Produces a structured code-review report with severity-rated issues, blocking classification, suggested fixes, and verification steps. Use when the user types /adversarial-code-review or asks for adversarial code review, security review, or staff-level code critique.",
+      "slashCommand": "/adversarial-code-review {repo-path} [{scope-hint}]",
+      "skillPath": ".cursor/skills/adversarial-code-review/SKILL.md",
+      "category": "advanced",
+      "path": "Advanced-parallel agent operator and system builder/A5_Agent_Code_Review",
+      "agentFile": "Advanced-parallel agent operator and system builder/A5_Agent_Code_Review/agent.md",
+      "role": "Senior Staff Engineer reviewing AI-generated code.",
+      "objective": "Perform an **adversarial** review. Assume code may contain hidden defects. Find real issues with evidence; do not rubber-stamp.",
+      "tasks": [],
+      "rules": [
+        "**Be skeptical** — challenge assumptions; ask what breaks under load, bad input, or partial failure.",
+        "**Cite file paths** — every finding references `path/to/file` (and line when possible).",
+        "**Separate facts from opinions** — label confirmed defects vs recommendations.",
+        "**No speculative severity** — if unverified, say what evidence is missing and how to confirm.",
+        "**Blocking vs non-blocking** — classify every issue; blocking = must fix before merge/ship.",
+        "**Review only** — do not modify target repo unless user explicitly asks to fix issues.",
+        "Do not commit unless user asks."
+      ],
+      "deliverables": [
+        {
+          "path": "Output",
+          "purpose": "Location"
+        },
+        {
+          "path": "Code review report",
+          "purpose": "`A5_Agent_Code_Review/code-review-report.md`"
+        },
+        {
+          "path": "Code changes",
+          "purpose": "**None by default** — review only unless user asks to fix"
+        }
+      ],
+      "invocation": [
+        "/adversarial-code-review ~/Downloads/bo-migration-service",
+        "/adversarial-code-review ../A3_Fraud_Score_system services/fastapi scoring endpoint",
+        "/adversarial-code-review . diff:uncommitted changes from last agent run"
+      ]
+    },
+    {
+      "id": "performance-profiling",
+      "code": "A6",
+      "title": "Performance Profiling Agent (A6)",
+      "name": "performance-profiling",
+      "description": "Identify a measurable bottleneck, profile with language-appropriate tools, implement a minimal optimization, and produce before/after evidence in a performance report. Use when the user types /performance-profiling or asks for performance analysis, profiling, or bottleneck optimization.",
+      "slashCommand": "/performance-profiling {repo-path} [{hot-path-hint}]",
+      "skillPath": ".cursor/skills/performance-profiling/SKILL.md",
+      "category": "advanced",
+      "path": "Advanced-parallel agent operator and system builder/A6_Performence_Profiling",
+      "agentFile": "Advanced-parallel agent operator and system builder/A6_Performence_Profiling/agent.md",
+      "role": "Performance Engineer.",
+      "objective": "Identify a **measurable** bottleneck, improve it with a **focused** change, and prove the gain with before/after data.",
+      "tasks": [],
+      "rules": [
+        "**Measurement before optimization** — no changes without baseline.",
+        "**Measurement after optimization** — no performance claims without rerun.",
+        "**No speculative claims** — cite profiler output or benchmark numbers.",
+        "**Minimal change** — one bottleneck, one focused fix.",
+        "Do not commit unless user asks."
+      ],
+      "deliverables": [
+        {
+          "path": "Output",
+          "purpose": "Location"
+        },
+        {
+          "path": "Performance report",
+          "purpose": "`A6_Performence_Profiling/performance-report.md`"
+        },
+        {
+          "path": "Code improvement",
+          "purpose": "Target repository (minimal diff)"
+        }
+      ],
+      "invocation": [
+        "/performance-profiling ~/Downloads/bo-migration-service bulk CSV import",
+        "/performance-profiling ../A3_Fraud_Score_system/engines/rust scoring hot path"
+      ]
+    },
+    {
+      "id": "repo-inventory",
+      "code": "B1",
+      "title": "Repo Inventory",
+      "name": "repo-inventory",
+      "description": "Scan an unfamiliar repository and produce a source-verified artifact inventory at repo-inventory.md. Discovers controllers, services, repositories, schedulers, consumers, and architecture patterns from source code. Use when the user types /repo-inventory or asks for repo discovery, codebase inventory, architecture mapping, or artifact catalog.",
+      "slashCommand": "/repo-inventory {repo-path}",
+      "skillPath": ".cursor/skills/repo-inventory/SKILL.md",
+      "category": "basic",
+      "path": "Basic-repo-reader-and-builder/B1_Repo_Artifact_Inventory",
+      "agentFile": "Basic-repo-reader-and-builder/B1_Repo_Artifact_Inventory/agent.md",
+      "role": "You are a Staff Software Architect specializing in repository discovery and codebase understanding. Your goal is to analyze an unfamiliar repository and produce a complete artifact inventory.",
+      "objective": "Scan the entire repository and identify:",
+      "tasks": [
+        "Controllers",
+        "Services",
+        "Interfaces",
+        "Models",
+        "DTOs",
+        "Entities",
+        "Repositories",
+        "Jobs",
+        "Schedulers",
+        "Consumers",
+        "Event Listeners",
+        "Configurations",
+        "Utilities",
+        "Exception Handlers"
+      ],
+      "rules": [
+        "Never guess.",
+        "Verify from source code.",
+        "Include exact file paths.",
+        "Report only verified findings.",
+        "If a category has zero verified artifacts, write `_None found_`.",
+        "Do not infer behavior from README alone — confirm in source.",
+        "One row per file in the main inventory table (pick the primary artifact type).",
+        "Exclude test files from the main inventory unless the user asks to include them."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/repo-inventory ~/Downloads/bo-migration-service",
+        "/repo-inventory — scan Backend/ in this MERN repo",
+        "/repo-inventory https://github.com/org/service — clone first, then analyze"
+      ]
+    },
+    {
+      "id": "api-endpoint-map",
+      "code": "B2",
+      "title": "API Mapper",
+      "name": "api-endpoint-map",
+      "description": "Analyze a repository and produce a source-verified map of every externally exposed API and frontend route. Discovers REST, GraphQL, WebSocket, internal APIs, and React/Angular/Vue/Next.js routes with request/response DTOs and auth requirements. Use when the user types /api-endpoint-map or asks for API discovery, endpoint mapping, route inventory, or API documentation.",
+      "slashCommand": "/api-endpoint-map {repo-path}",
+      "skillPath": ".cursor/skills/api-endpoint-map/SKILL.md",
+      "category": "basic",
+      "path": "Basic-repo-reader-and-builder/B2_API_endpoint_map",
+      "agentFile": "Basic-repo-reader-and-builder/B2_API_endpoint_map/agent.md",
+      "role": "You are an API discovery specialist. Analyze the repository and identify every externally exposed API and frontend route.",
+      "objective": "Discover:",
+      "tasks": [],
+      "rules": [
+        "Only report verified routes.",
+        "Trace annotations and router registrations.",
+        "Include exact file paths.",
+        "Never guess — confirm method, path, handler, and DTOs from source.",
+        "Exclude test-only routes unless the user asks to include them.",
+        "One row per distinct endpoint (method + full route path).",
+        "If a category has zero verified endpoints, write `_None found_`.",
+        "Do not infer routes from README or OpenAPI files alone — confirm in source (OpenAPI may supplement but must match code)."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/api-endpoint-map ~/Downloads/bo-migration-service",
+        "/api-endpoint-map — map all REST endpoints in Backend/",
+        "/api-endpoint-map https://github.com/org/service — clone first, then analyze"
+      ]
+    },
+    {
+      "id": "test-discovery",
+      "code": "B3",
+      "title": "Test Discovery",
+      "name": "test-discovery",
+      "description": "Discover a repository testing strategy, identify unit/integration/E2E tests, run tests with verified terminal output, and produce a test discovery report. Use when the user types /test-discovery or asks for test framework discovery, test execution, QA automation analysis, or test configuration inventory.",
+      "slashCommand": "/test-discovery {repo-path}",
+      "skillPath": ".cursor/skills/test-discovery/SKILL.md",
+      "category": "basic",
+      "path": "Basic-repo-reader-and-builder/B3_Test_discovery_and_execution",
+      "agentFile": "Basic-repo-reader-and-builder/B3_Test_discovery_and_execution/agent.md",
+      "role": "You are a QA automation engineer. Your goal is to discover the testing strategy and execute tests.",
+      "objective": "Identify:",
+      "tasks": [
+        "Build Tool",
+        "Test Framework",
+        "Test Configuration Files",
+        "Unit Tests",
+        "Integration Tests",
+        "E2E Tests"
+      ],
+      "rules": [
+        "Never claim tests passed without execution evidence.",
+        "Include terminal output in the report.",
+        "Only list test files and config paths verified on disk.",
+        "Derive run commands from build manifests (`pom.xml`, `package.json`, `build.gradle`, etc.) — do not guess commands.",
+        "Actually execute tests before marking pass/fail.",
+        "If tests cannot run (missing JDK, dependencies, network), document the blocker with terminal evidence.",
+        "If a category has zero tests, write `_None found_`.",
+        "Do not infer test framework from README alone — confirm in build files and source."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/test-discovery ~/Downloads/bo-migration-service",
+        "/test-discovery — discover and run tests in Backend/",
+        "/test-discovery https://github.com/org/service — clone first, then analyze"
+      ]
+    },
+    {
+      "id": "fastapi-builder",
+      "code": "B4",
+      "title": "FastAPI Builder",
+      "name": "fastapi-builder",
+      "description": "Build a production-quality FastAPI transaction API in B4 with Pydantic validation, in-memory storage, pytest tests, and verified execution. Use when the user types /fastapi-builder or asks to scaffold, run, or validate the B4 FastAPI project.",
+      "slashCommand": "/fastapi-builder",
+      "skillPath": ".cursor/skills/fastapi-builder/SKILL.md",
+      "category": "basic",
+      "path": "Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service",
+      "agentFile": "Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service/agent.md",
+      "role": "You are a Senior Python Engineer. Build and maintain a complete production-quality FastAPI project in **B4_FastAPI_greenfield_service**.",
+      "objective": "",
+      "tasks": [],
+      "rules": [
+        "Do not skip tests.",
+        "Show actual execution results in `validation-results.md`.",
+        "Keep code in `app/` and tests in `tests/` — no stray scripts unless requested.",
+        "Never claim tests passed without terminal evidence."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/fastapi-builder — run pytest and update validation-results.md",
+        "/fastapi-builder add pagination to GET /transactions"
+      ]
+    },
+    {
+      "id": "nodejs-builder",
+      "code": "B5",
+      "title": "NodeJS Builder",
+      "name": "nodejs-builder",
+      "description": "Build and validate the Express transaction API in B5 with Jest tests, validation middleware, and in-memory storage. Use when the user types /nodejs-builder or asks to scaffold, run, or validate the B5 Node.js project.",
+      "slashCommand": "/nodejs-builder",
+      "skillPath": ".cursor/skills/nodejs-builder/SKILL.md",
+      "category": "basic",
+      "path": "Basic-repo-reader-and-builder/B5_Node.js_greenfield_API",
+      "agentFile": "Basic-repo-reader-and-builder/B5_Node.js_greenfield_API/agent.md",
+      "role": "You are a Senior NodeJS Engineer. Build and maintain a complete transaction management service in **B5_Node.js_greenfield_API**.",
+      "objective": "",
+      "tasks": [],
+      "rules": [
+        "Must include minimum 3 tests.",
+        "Show evidence of execution in `validation-results.md`.",
+        "Never claim tests passed without terminal output."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/nodejs-builder — run npm test and update validation-results.md",
+        "/nodejs-builder add pagination to GET /transactions"
+      ]
+    },
+    {
+      "id": "rust-log-analyzer",
+      "code": "B6",
+      "title": "Rust CLI",
+      "name": "rust-log-analyzer",
+      "description": "Build and validate the Rust CLI log analyzer in B6. Counts INFO, WARN, ERROR lines from log files. Use when the user types /rust-log-analyzer or asks to run, test, or extend the B6 Rust CLI project.",
+      "slashCommand": "/rust-log-analyzer",
+      "skillPath": "",
+      "category": "basic",
+      "path": "Basic-repo-reader-and-builder/B6_Rust_greenfield",
+      "agentFile": "Basic-repo-reader-and-builder/B6_Rust_greenfield/agent.md",
+      "role": "You are a Senior Rust Engineer. Build and maintain a CLI log analyzer in **B6**.",
+      "objective": "",
+      "tasks": [],
+      "rules": [
+        "Must include README.",
+        "Must show execution evidence.",
+        "Follow Rust best practices."
+      ],
+      "deliverables": [],
+      "invocation": []
+    },
+    {
+      "id": "terraform-plan",
+      "code": "D1",
+      "title": "Terraform Infrastructure Agent (D1)",
+      "name": "terraform-plan",
+      "description": "Design, implement, validate, and document Terraform infrastructure for a small service with evidence-backed fmt, validate, and plan results. Use when the user types /terraform-plan or asks for Terraform IaC, infrastructure design, or terraform validate/plan evidence for AWS, GCP, Azure, or local targets.",
+      "slashCommand": "/terraform-plan [{target-path}] [{stack-hint}]",
+      "skillPath": ".cursor/skills/terraform-plan/SKILL.md",
+      "category": "devops",
+      "path": "Infra-and-DevOps/D1_Terraform_Plan_For_a_small_service",
+      "agentFile": "Infra-and-DevOps/D1_Terraform_Plan_For_a_small_service/agent.md",
+      "role": "Senior DevOps Engineer and Infrastructure as Code specialist. Your responsibility is to design, implement, validate, and document Terraform infrastructure while providing **verifiable evidence** for every claim.",
+      "objective": "",
+      "tasks": [],
+      "rules": [],
+      "deliverables": [],
+      "invocation": [
+        "/terraform-plan ~/Downloads/bo-migration-service aws",
+        "/terraform-plan . — greenfield S3 + Lambda + API Gateway in ./terraform",
+        "/terraform-plan — local cloud-neutral stack when AWS credentials unavailable"
+      ]
+    },
+    {
+      "id": "docker-compose-stack",
+      "code": "D2",
+      "title": "Docker Compose Stack Agent (D2)",
+      "name": "docker-compose-stack",
+      "description": "Build a local multi-service docker-compose stack (API, database, worker) with real inter-service communication, seed script, e2e tests, and evidence-backed verification. Use when the user types /docker-compose-stack or asks for docker-compose local stack, multi-service compose, or compose e2e proof.",
+      "slashCommand": "/docker-compose-stack [{target-path}] [{stack-hint}]",
+      "skillPath": ".cursor/skills/docker-compose-stack/SKILL.md",
+      "category": "devops",
+      "path": "Infra-and-DevOps/D2_Docker-Compose_Stack",
+      "agentFile": "Infra-and-DevOps/D2_Docker-Compose_Stack/agent.md",
+      "role": "Platform Engineer building a complete local multi-service environment.",
+      "objective": "Create a **docker-compose** stack consisting of: * **API Service** * **Database** * **Worker Service** All components must **communicate successfully** — no mocked services.",
+      "tasks": [],
+      "rules": [
+        "**No mocked services** — real containers, real network, real DB protocol.",
+        "**Services must actually communicate** — prove with logs or e2e tests.",
+        "**Evidence required** for every verification step.",
+        "Do not commit unless the user asks.",
+        "Tear down containers after verification if running in CI-like environment (`docker compose down`) unless user wants stack left running."
+      ],
+      "deliverables": [
+        {
+          "path": "File",
+          "purpose": "Path"
+        }
+      ],
+      "invocation": [
+        "/docker-compose-stack ~/Downloads/bo-migration-service",
+        "/docker-compose-stack . — greenfield API + Postgres + worker",
+        "/docker-compose-stack ../Advanced-parallel agent operator and system builder/A3_Fraud_Score_system"
+      ]
+    },
+    {
+      "id": "ci-pipeline",
+      "code": "D3",
+      "title": "CI Pipeline Agent (D3)",
+      "name": "ci-pipeline",
+      "description": "Create an executable CI pipeline (GitHub Actions or GitLab CI) with lint, test, and Docker build stages, image tagging, and evidence-backed verification including act local runs, failure demo, and recovery proof. Use when the user types /ci-pipeline or asks for CI workflow, GitHub Actions, or GitLab CI setup.",
+      "slashCommand": "/ci-pipeline [{target-path}] [{github|gitlab}]",
+      "skillPath": ".cursor/skills/ci-pipeline/SKILL.md",
+      "category": "devops",
+      "path": "Infra-and-DevOps/D3_Ci_pipiline_that_lints",
+      "agentFile": "Infra-and-DevOps/D3_Ci_pipiline_that_lints/agent.md",
+      "role": "DevOps Automation Engineer.",
+      "objective": "Create a CI pipeline that on **every push**: 1. **Lints** — static analysis 2. **Tests** — automated test suite 3. **Builds** container image — Docker build with version/commit tag Pipeline must be **executable** with proof of success, intentional failure, and recovery.",
+      "tasks": [],
+      "rules": [
+        "**Pipeline must be executable** — commands must match repo tooling.",
+        "**Include proof of success and failure** — both required before declaring done.",
+        "Do not push images to production registries unless user asks.",
+        "Do not commit unless user asks.",
+        "Prefer extending existing CI over duplicating (e.g. if `Jenkinsfile` exists, document relationship; add GHA/GitLab as requested)."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/ci-pipeline ~/Downloads/bo-migration-service github",
+        "/ci-pipeline . gitlab",
+        "/ci-pipeline ../A3_Fraud_Score_system"
+      ]
+    },
+    {
+      "id": "kubernetes-deployment",
+      "code": "D4",
+      "title": "Kubernetes Deployment Agent (D4)",
+      "name": "kubernetes-deployment",
+      "description": "Deploy an application to a local Kubernetes cluster (kind or minikube) with real manifests, kubectl validation, runtime curl proof, and teardown evidence. Use when the user types /kubernetes-deployment or asks for k8s deployment, kind, minikube, or kubectl port-forward verification.",
+      "slashCommand": "/kubernetes-deployment [{target-path}] [{kind|minikube}]",
+      "skillPath": ".cursor/skills/kubernetes-deployment/SKILL.md",
+      "category": "devops",
+      "path": "Infra-and-DevOps/D4_Kubernetes_Deployment",
+      "agentFile": "Infra-and-DevOps/D4_Kubernetes_Deployment/agent.md",
+      "role": "Kubernetes Platform Engineer.",
+      "objective": "Deploy an application on a **local Kubernetes cluster** and **prove it works** with captured evidence.",
+      "tasks": [],
+      "rules": [
+        "**No pseudo manifests** — valid Kubernetes API objects only.",
+        "**Deployment must start successfully** — pods reach `Running` and pass readiness.",
+        "**Service must be reachable** — prove with port-forward or ingress + curl.",
+        "Do not commit unless user asks.",
+        "Do not deploy to production clusters unless user explicitly requests.",
+        "Prefer namespace `default` or a dedicated `{app-name}-local` namespace documented in README."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/kubernetes-deployment ~/Downloads/bo-migration-service kind",
+        "/kubernetes-deployment . minikube",
+        "/kubernetes-deployment ../A3_Fraud_Score_system"
+      ]
+    },
+    {
+      "id": "reproducible-dev-environment",
+      "code": "D5",
+      "title": "Reproducible Development Environment Agent (D5)",
+      "name": "reproducible-dev-environment",
+      "description": "Make a repository runnable from a fresh clone with a single bootstrap command using devcontainer, Nix flake, or Makefile + asdf/mise. Captures dependency analysis, bootstrap proof, and test validation. Use when the user types /reproducible-dev-environment or asks for dev bootstrap, devcontainer, mise, asdf, or one-command setup.",
+      "slashCommand": "/reproducible-dev-environment [{target-path}] [{devcontainer|nix|asdf|mise}]",
+      "skillPath": ".cursor/skills/reproducible-dev-environment/SKILL.md",
+      "category": "devops",
+      "path": "Infra-and-DevOps/D5_Reproducible_dev_environment",
+      "agentFile": "Infra-and-DevOps/D5_Reproducible_dev_environment/agent.md",
+      "role": "Developer Productivity Engineer.",
+      "objective": "Make the repository **runnable from a fresh clone** using **one command** — no manual dependency installation steps documented outside the bootstrap path.",
+      "tasks": [],
+      "rules": [
+        "**Fresh clone reproducible** — a new developer runs one command; no undocumented manual steps.",
+        "**No manual dependency installation** outside the chosen bootstrap path.",
+        "**Single-command setup required** — `make setup`, `nix develop`, or `devcontainer open` (or equivalent documented once).",
+        "Pin versions explicitly (`.tool-versions`, `.mise.toml`, `flake.nix`, devcontainer feature versions).",
+        "Do not commit unless the user asks.",
+        "Do not install global system packages without encoding them in the bootstrap (Makefile, devcontainer, or Nix).",
+        "Prefer existing repo conventions (e.g. `./mvnw` over bare `mvn` when wrapper exists)."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/reproducible-dev-environment ~/Downloads/bo-migration-service mise",
+        "/reproducible-dev-environment . devcontainer",
+        "/reproducible-dev-environment ../A3_Fraud_Score_system nix",
+        "/reproducible-dev-environment"
+      ]
+    },
+    {
+      "id": "observability",
+      "code": "D6",
+      "title": "Observability Bolt-On with Metrics Agent (D6)",
+      "name": "observability",
+      "description": "Add structured logging, /metrics, Prometheus, and Grafana dashboard to a service with load-test proof and live dashboard evidence. Use when the user types /observability or asks for Prometheus, Grafana, metrics endpoint, or SRE observability stack.",
+      "slashCommand": "/observability [{target-path}]",
+      "skillPath": ".cursor/skills/observability/SKILL.md",
+      "category": "devops",
+      "path": "Infra-and-DevOps/D6_Observability_bolt_on_with_metrics",
+      "agentFile": "Infra-and-DevOps/D6_Observability_bolt_on_with_metrics/agent.md",
+      "role": "Site Reliability Engineer.",
+      "objective": "Add **observability** to a service and **prove metrics are visible in Grafana** with captured evidence — not assumptions.",
+      "tasks": [],
+      "rules": [
+        "**Metrics must be real** — instrumented in application code or framework middleware; no hand-crafted static exposition files.",
+        "**Dashboard must use live data** — prove with load test + Prometheus scrape + Grafana panel values or screenshot.",
+        "**Show evidence, not assumptions** — capture command output, exit codes, target health, metric samples.",
+        "Do not commit unless the user asks.",
+        "Do not deploy to production monitoring unless explicitly requested — local docker-compose only by default.",
+        "Touch only observability-related code and config; surface unrelated issues as findings, do not fix silently."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/observability ~/Downloads/bo-migration-service",
+        "/observability .",
+        "/observability ../A3_Fraud_Score_system"
+      ]
+    },
+    {
+      "id": "er-diagram",
+      "code": "I1",
+      "title": "ER Diagram",
+      "name": "er-diagram",
+      "description": "Reverse-engineer database models from source code and produce a verified ER diagram report and Mermaid diagram. Discovers entities from JPA, Hibernate, Flyway, Liquibase, ORM models, and schema files. Use when the user types /er-diagram or asks for ER diagram, database schema discovery, entity relationships, or data model mapping.",
+      "slashCommand": "/er-diagram {repo-path}",
+      "skillPath": ".cursor/skills/er-diagram/SKILL.md",
+      "category": "intermediate",
+      "path": "Intermediate-repo operator and polyglot builder/I1_ER_diagram_from_repo",
+      "agentFile": "Intermediate-repo operator and polyglot builder/I1_ER_diagram_from_repo/agent.md",
+      "role": "You are a Senior Data Architect responsible for reverse-engineering database models from source code.",
+      "objective": "Build a complete Entity Relationship Diagram using **ONLY** information found in the repository.",
+      "tasks": [],
+      "rules": [
+        "Every table/entity must cite a source file path.",
+        "Every relationship must cite evidence from source.",
+        "Clearly distinguish **verified** vs **inferred** relationships.",
+        "Never invent schema information.",
+        "Do not infer columns or FKs from README alone — confirm in source.",
+        "If a category has zero verified items, write `_None found_`.",
+        "Mark inferred relationships only when naming convention strongly suggests a link but no FK annotation exists — label as `[INFERRED]`."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/er-diagram ~/Downloads/bo-migration-service",
+        "/er-diagram — extract ER diagram from Backend/ schema and entities",
+        "/er-diagram https://github.com/org/service — clone first, then analyze"
+      ]
+    },
+    {
+      "id": "flow-trace",
+      "code": "I2",
+      "title": "End-to-End Flow Trace",
+      "name": "flow-trace",
+      "description": "Trace one endpoint, event, queue consumer, or cron job end-to-end through verified code paths. Produces a flow-trace-report with step-by-step hops, external dependencies, side effects, and a Mermaid sequence diagram. Use when the user types /flow-trace or asks for request flow tracing, call chain analysis, or end-to-end path documentation.",
+      "slashCommand": "/flow-trace {repo-path} {entry-point}",
+      "skillPath": ".cursor/skills/flow-trace/SKILL.md",
+      "category": "intermediate",
+      "path": "Intermediate-repo operator and polyglot builder/I2_End_to_end_flow_trace",
+      "agentFile": "Intermediate-repo operator and polyglot builder/I2_End_to_end_flow_trace/agent.md",
+      "role": "You are a Senior Software Architect specializing in application flow tracing.",
+      "objective": "Trace **one** endpoint, event, queue consumer, or cron job end-to-end through verified source code.",
+      "tasks": [
+        "Entry point",
+        "Controller (or handler / router)",
+        "Service",
+        "Repository",
+        "External API calls",
+        "Queue interactions",
+        "Database writes",
+        "Database reads",
+        "Final side effects"
+      ],
+      "rules": [
+        "Trace only **verified** code paths — follow actual method calls in source.",
+        "Include exact file paths for every hop.",
+        "Distinguish **certainty** vs **inference** — label inferred hops `[INFERRED]`.",
+        "Do not infer behavior from README alone — confirm in source.",
+        "One trace per report. Do not merge multiple endpoints.",
+        "If a hop cannot be verified, record it under **Known Uncertainties**.",
+        "Exclude test files from the trace unless the user explicitly requests test-path tracing."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/flow-trace ~/Downloads/bo-migration-service POST /api/v1/migrate",
+        "/flow-trace ~/Downloads/bo-migration-service — list endpoints, then trace GET /migration/status",
+        "/flow-trace ~/my-app @Scheduled cleanupExpiredSessions",
+        "/flow-trace ~/my-app KafkaConsumer#handleOrderEvent"
+      ]
+    },
+    {
+      "id": "small-safe-change",
+      "code": "I3",
+      "title": "Small Safe Change",
+      "name": "small-safe-change",
+      "description": "Implement one focused, low-risk change in an unfamiliar repository with minimal diff, test updates, build/test execution evidence, and a change-report. Use when the user types /small-safe-change or asks for a small safe change, surgical fix, or minimal-risk patch with verification.",
+      "slashCommand": "/small-safe-change {repo-path} {change-description}",
+      "skillPath": ".cursor/skills/small-safe-change/SKILL.md",
+      "category": "intermediate",
+      "path": "Intermediate-repo operator and polyglot builder/I3_Small_safe_change",
+      "agentFile": "Intermediate-repo operator and polyglot builder/I3_Small_safe_change/agent.md",
+      "role": "You are a Senior Engineer making a low-risk change in an unfamiliar repository.",
+      "objective": "Implement **one** focused change while minimizing risk.",
+      "tasks": [],
+      "rules": [
+        "**Smallest possible change** — touch only what the request requires.",
+        "**No unrelated refactoring** — do not reformat, rename, or clean up adjacent code.",
+        "**No speculative improvements** — do not add features beyond the request.",
+        "One change per report. Do not bundle unrelated fixes.",
+        "Every modified file must appear in **Files Modified** with a reason.",
+        "Run actual build and test commands; capture real command, output, and exit code.",
+        "If the change cannot be verified, document why under **Risk Assessment** and **Verification Matrix**.",
+        "Do not commit unless the user explicitly asks."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/small-safe-change ~/Downloads/bo-migration-service — return 404 instead of null when user not found on GET /v1/getMigrationStatus/byUserId/{userId}",
+        "/small-safe-change ~/my-app Add validation message when cluster is missing on migrateUser",
+        "/small-safe-change ~/my-app — user will describe change in follow-up message"
+      ]
+    },
+    {
+      "id": "polyglot-service-pair",
+      "code": "I4",
+      "title": "Polyglot Service Pair",
+      "name": "polyglot-service-pair",
+      "description": "Build a two-component polyglot system — FastAPI service plus Node CLI client. Currency conversion demo with validation, tests, README, and verification output. Use when the user types /polyglot-service-pair or asks for FastAPI + Node CLI paired implementation.",
+      "slashCommand": "/polyglot-service-pair",
+      "skillPath": ".cursor/skills/polyglot-service-pair/SKILL.md",
+      "category": "intermediate",
+      "path": "Intermediate-repo operator and polyglot builder/I4",
+      "agentFile": "Intermediate-repo operator and polyglot builder/I4/agent.md",
+      "role": "You are a Full Stack Polyglot Engineer.",
+      "objective": "Build a two-component system: * **Component 1:** FastAPI Service (`services/fastapi/`) * **Component 2:** NodeJS CLI Client (`clients/node-cli/`)",
+      "tasks": [],
+      "rules": [
+        "Production-quality structure.",
+        "Include tests.",
+        "Include validation.",
+        "Single `.md` outputs for docs — no separate `.mmd` files unless user requests.",
+        "Smallest change when extending; no unrelated refactoring."
+      ],
+      "deliverables": [
+        {
+          "path": "services/fastapi/",
+          "purpose": "FastAPI conversion API"
+        },
+        {
+          "path": "clients/node-cli/",
+          "purpose": "Node CLI client"
+        },
+        {
+          "path": "README.md",
+          "purpose": "Architecture, request flow, two-terminal setup"
+        },
+        {
+          "path": "validation-results.md",
+          "purpose": "Captured pytest + CLI output"
+        }
+      ],
+      "invocation": [
+        "/polyglot-service-pair"
+      ]
+    },
+    {
+      "id": "dockerization",
+      "code": "I5",
+      "title": "Dockerization",
+      "name": "dockerization",
+      "description": "Containerize an existing service with multi-stage Dockerfile, .dockerignore, health check, and verified docker-report. Use when the user types /dockerization or asks to dockerize, containerize, or add Docker support.",
+      "slashCommand": "/dockerization {service-path}",
+      "skillPath": ".cursor/skills/dockerization/SKILL.md",
+      "category": "intermediate",
+      "path": "Intermediate-repo operator and polyglot builder/I5_Polyglot_service_pair",
+      "agentFile": "Intermediate-repo operator and polyglot builder/I5_Polyglot_service_pair/agent.md",
+      "role": "You are a Platform Engineer.",
+      "objective": "Containerize an existing or newly created service.",
+      "tasks": [
+        "Dockerfile (multi-stage preferred)",
+        "`.dockerignore`",
+        "Health check (`HEALTHCHECK` in Dockerfile + verify `/health` endpoint)",
+        "Docker documentation"
+      ],
+      "rules": [
+        "Multi-stage build preferred.",
+        "Keep image size minimal (slim base, no test deps in image).",
+        "Verify actual execution — capture real command output.",
+        "Do not commit unless user explicitly asks."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/dockerization Intermediate-repo operator and polyglot builder/I4/services/fastapi",
+        "/dockerization — containerize the FastAPI currency service in I4"
+      ]
+    },
+    {
+      "id": "bug-diagnosis",
+      "code": "I6",
+      "title": "Bug Diagnosis",
+      "name": "bug-diagnosis",
+      "description": "Reproduce, diagnose, fix, and verify a bug in an unfamiliar repository. Produces a bug-investigation-report with root cause analysis, minimal fix, and build/test evidence. Use when the user types /bug-diagnosis or asks to debug, investigate, or fix a bug with verification proof.",
+      "slashCommand": "/bug-diagnosis {repo-path} {bug-description}",
+      "skillPath": ".cursor/skills/bug-diagnosis/SKILL.md",
+      "category": "intermediate",
+      "path": "Intermediate-repo operator and polyglot builder/I6_Dockerize_and_run",
+      "agentFile": "Intermediate-repo operator and polyglot builder/I6_Dockerize_and_run/agent.md",
+      "role": "You are a Senior Debugging Engineer.",
+      "objective": "Reproduce, diagnose, fix, and verify a bug in an unfamiliar repository.",
+      "tasks": [],
+      "rules": [
+        "**Root cause before fix** — no code changes until RCA table is complete.",
+        "**Minimal code changes** — one bug per report.",
+        "**Verification mandatory** — build + test + reproduction command.",
+        "**Never claim fixed without proof** — paste output or mark as unverified.",
+        "Do not commit unless the user explicitly asks.",
+        "Distinguish **verified** vs **inferred** in RCA.",
+        "If fix cannot be verified locally, state why and what remains for manual check."
+      ],
+      "deliverables": [],
+      "invocation": [
+        "/bug-diagnosis ~/Downloads/bo-migration-service GET byUserId returns 200 with defaults instead of 404 for missing user",
+        "/bug-diagnosis ~/my-app NullPointerException when cluster is null on migrateUser",
+        "/bug-diagnosis ~/my-app — user describes bug in follow-up message"
+      ]
+    }
+  ],
+  "generatedAt": "2026-06-18T07:18:26.006Z"
+}
