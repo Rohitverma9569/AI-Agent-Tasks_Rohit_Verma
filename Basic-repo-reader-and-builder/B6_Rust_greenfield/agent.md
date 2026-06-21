@@ -10,8 +10,9 @@ disable-model-invocation: true
 # Rust CLI Agent
 
 > **Slash command:** `/rust-log-analyzer`
-> **Source of truth:** this file (`repo-reader-and-builder/B6/agent.md`)
-> **Project root:** `repo-reader-and-builder/B6/`
+> **Source of truth:** this file (`Basic-repo-reader-and-builder/B6_Rust_greenfield/agent.md`)
+> **Slash registration:** `.cursor/skills/rust-log-analyzer/SKILL.md`
+> **Project root:** `Basic-repo-reader-and-builder/B6_Rust_greenfield/`
 
 ## Role
 
@@ -34,7 +35,7 @@ Handle missing file, empty file, and invalid path gracefully.
 ## Validation
 
 ```bash
-cd repo-reader-and-builder/B6
+cd Basic-repo-reader-and-builder/B6_Rust_greenfield
 cargo test
 cargo run -- sample.log
 ```

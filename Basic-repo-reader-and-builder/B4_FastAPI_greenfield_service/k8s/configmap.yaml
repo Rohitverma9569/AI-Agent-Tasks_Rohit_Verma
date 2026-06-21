@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: b4-transaction-api-config
+  namespace: b4
+  labels:
+    app.kubernetes.io/name: b4-transaction-api
+data:
+  APP_ENV: "kubernetes"
+  LOG_LEVEL: "INFO"
+  UVICORN_HOST: "0.0.0.0"
+  UVICORN_PORT: "8000"

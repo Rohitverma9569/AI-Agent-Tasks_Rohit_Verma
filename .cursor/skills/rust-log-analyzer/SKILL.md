@@ -9,6 +9,6 @@ disable-model-invocation: true
 
 # Rust Log Analyzer (slash command entry)
 
-Read and follow **`repo-reader-and-builder/B6/agent.md`** in full.
+Read and follow **`Basic-repo-reader-and-builder/B6_Rust_greenfield/agent.md`** in full.
 
-Project root: **`repo-reader-and-builder/B6/`**. Validate with `cargo test` and update **`validation-results.md`**.
+Project root: **`Basic-repo-reader-and-builder/B6_Rust_greenfield/`**. Validate with `cargo test` and update **`validation-results.md`**.

@@ -1,0 +1,8 @@
+aws_region   = "ap-south-1"
+project_name = "d1-small-service"
+environment  = "dev"
+
+# Set to true and start LocalStack for local validation without AWS credentials:
+# docker run --rm -p 4566:4566 localstack/localstack
+# use_localstack        = true
+# localstack_endpoint   = "http://localhost:4566"

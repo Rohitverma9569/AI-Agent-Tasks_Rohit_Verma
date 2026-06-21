@@ -110,7 +110,7 @@
       "name": "fraud-score-system",
       "description": "Build a three-component fraud scoring system — FastAPI API, Node worker, Rust risk engine. Produces services/, workers/, engines/, docs, and tests. Use when the user asks for polyglot fraud scoring or A3 fraud system.",
       "slashCommand": "/fraud-score-system",
-      "skillPath": "",
+      "skillPath": ".cursor/skills/fraud-score-system/SKILL.md",
       "category": "advanced",
       "path": "Advanced-parallel agent operator and system builder/A3_Fraud_Score_system",
       "agentFile": "Advanced-parallel agent operator and system builder/A3_Fraud_Score_system/agent.md",
@@ -453,7 +453,7 @@
       "name": "rust-log-analyzer",
       "description": "Build and validate the Rust CLI log analyzer in B6. Counts INFO, WARN, ERROR lines from log files. Use when the user types /rust-log-analyzer or asks to run, test, or extend the B6 Rust CLI project.",
       "slashCommand": "/rust-log-analyzer",
-      "skillPath": "",
+      "skillPath": ".cursor/skills/rust-log-analyzer/SKILL.md",
       "category": "basic",
       "path": "Basic-repo-reader-and-builder/B6_Rust_greenfield",
       "agentFile": "Basic-repo-reader-and-builder/B6_Rust_greenfield/agent.md",
@@ -847,5 +847,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-06-18T07:18:26.006Z"
+  "generatedAt": "2026-06-20T20:10:54.738Z"
 }

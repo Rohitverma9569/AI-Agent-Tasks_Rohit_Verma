@@ -1,20 +1,19 @@
 ---
 name: observability
 description: >-
-  Add structured logging, /metrics, Prometheus, Grafana dashboard, and load-test
-  proof to a service. Captures curl metrics, healthy Prometheus targets, and live
-  Grafana evidence. Use when the user types /observability or asks for SRE
-  metrics, Prometheus, or Grafana setup.
+  Add structured logging, Prometheus metrics, Grafana dashboards, and load-test
+  proof to an existing application. Use when the user types /observability or
+  asks for Prometheus, Grafana, metrics endpoint, or observability bolt-on.
 disable-model-invocation: true
 ---
 
-# Observability Bolt-On with Metrics (slash command entry)
+# Observability Bolt-On (slash command entry)
 
 Read and follow **`Infra-and-DevOps/D6_Observability_bolt_on_with_metrics/agent.md`** in full.
 
-Add structured logging and `/metrics` (request count, duration, errors) to `{target-path}/`. Create `observability/docker-compose.yml`, `prometheus.yml`, Grafana provisioning, dashboard JSON, `load-test.sh`, and `observability/README.md`.
+Add structured logging and metrics to `{target-path}/`. Create `monitoring/prometheus.yml`, Grafana provisioning under `monitoring/grafana/`, extend or create `docker-compose.yml`, and `scripts/load-test.sh`.
 
-Start stack in order: Service → Prometheus → Grafana → load generator. Capture `curl /metrics`, Prometheus target health, and Grafana live metrics evidence.
+Run `docker compose up`, verify `/metrics` with curl, verify Prometheus targets UP, generate load, prove dashboard updates.
 
 Write the report to **`Infra-and-DevOps/D6_Observability_bolt_on_with_metrics/docs/observability-report.md`**.
 

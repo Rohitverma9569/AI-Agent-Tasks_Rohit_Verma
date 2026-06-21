@@ -9,7 +9,9 @@ disable-model-invocation: true
 
 # Polyglot System Builder Agent (A3)
 
-> **Source of truth:** this file (`A3_Fraud_Score_system/agent.md`)
+> **Slash command:** `/fraud-score-system`
+> **Source of truth:** this file (`Advanced-parallel agent operator and system builder/A3_Fraud_Score_system/agent.md`)
+> **Slash registration:** `.cursor/skills/fraud-score-system/SKILL.md`
 
 ## Role
 

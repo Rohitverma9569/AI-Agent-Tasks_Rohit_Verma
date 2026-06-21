@@ -1,0 +1,13 @@
+{
+  "name": "d2-api",
+  "version": "1.0.0",
+  "description": "D2 Docker Compose Stack — API service",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}

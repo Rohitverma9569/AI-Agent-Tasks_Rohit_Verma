@@ -1,10 +1,11 @@
 # CI Pipeline Report
 
-> **Target:** `/Users/rohitverma/Downloads/bo-migration-service`  
+> **Target:** `Infra-and-DevOps/D3_Ci_pipiline_that_lints`  
 > **Platform:** GitHub Actions  
-> **Generated:** 2026-06-17  
+> **Generated:** 2026-06-21  
 > **Agent:** D3 — CI Pipeline  
-> **Workflow:** `.github/workflows/build.yml`
+> **Workflow:** `.github/workflows/build.yml`  
+> **App:** `app/` (Node.js 20 · Express · ESLint · node:test)
 
 ---
 
@@ -12,16 +13,18 @@
 
 | Job | Stage | Command | Depends on |
 | --- | ----- | ------- | ---------- |
-| `lint` | Static analysis | `mvn -B validate compile` | — |
-| `test` | Unit tests | `mvn -B test` | `lint` |
-| `build` | Docker image | `docker/build-push-action` + tags | `test` |
+| `lint` | Static analysis | `npm run lint` (ESLint) | — |
+| `test` | Unit tests | `npm test` (node --test) | `lint` |
+| `build` | Docker image | `docker/build-push-action` + SHA tags | `test` |
 
-**Trigger:** `push` (all branches)  
-**Java:** 17 (Temurin)  
-**Image tags:** `bo-migration-service:${{ github.sha }}`, `bo-migration-service:sha-${{ github.sha }}`
+**Triggers:** `push` (all branches) · `pull_request` (all branches)  
+**Runner:** `ubuntu-latest`  
+**Node.js:** 20  
+**Image tags:** `d3-ci-demo-app:${{ github.sha }}`, `d3-ci-demo-app:sha-${{ github.sha }}`  
+**Registry push:** `false` (build proof only)
 
 ```
-push → lint → test → build (Docker tag)
+push / pull_request → lint → test → build (Docker + SHA tag)
 ```
 
 ---
@@ -30,24 +33,26 @@ push → lint → test → build (Docker tag)
 
 | File | Path | Status |
 | ---- | ---- | ------ |
-| Workflow | `bo-migration-service/.github/workflows/build.yml` | Created |
-| CI docs | `bo-migration-service/docs/CI.md` | Created |
-| Dockerfile | `bo-migration-service/Dockerfile` | Pre-existing (used by build job) |
+| Workflow | `.github/workflows/build.yml` | Created |
+| Demo app | `app/` | Created |
+| Dockerfile | `app/Dockerfile` | Created |
+| README | `README.md` | Created |
+| Report | `docs/ci-pipeline-report.md` | Created |
 
 ---
 
-## Workflow YAML
+## Workflow Explanation
 
-Path: `.github/workflows/build.yml`
+Path: [`.github/workflows/build.yml`](../.github/workflows/build.yml)
 
-Key features:
-
-- Three jobs: `lint`, `test`, `build`
-- `concurrency` cancels stale runs per branch
-- Maven cache via `actions/setup-java@v4` (`cache: maven`)
-- Docker GHA cache via `cache-from` / `cache-to: type=gha`
-- Build args: `git_commit_id`, `env_name=ci`
-- **No registry push** (`push: false`) — build + tag proof only
+| Feature | Implementation |
+| ------- | -------------- |
+| Checkout | `actions/checkout@v4` on every job |
+| Cache | `actions/setup-node@v4` with `cache: npm` |
+| Lint job | `npm ci` → `npm run lint` in `app/` |
+| Test job | `needs: lint` → `npm test` → upload artifact |
+| Build job | `needs: test` → Buildx + GHA cache → tag with `github.sha` |
+| Concurrency | Cancel stale runs per branch |
 
 ---
 
@@ -55,72 +60,97 @@ Key features:
 
 | Layer | Configuration |
 | ----- | ------------- |
-| **Maven** | `actions/setup-java@v4` with `cache: maven` |
-| **Maven local repo** | `MAVEN_OPTS=-Dmaven.repo.local=$GITHUB_WORKSPACE/.m2-cache/repository` |
-| **Docker** | Buildx GHA cache: `cache-from: type=gha`, `cache-to: type=gha,mode=max` |
+| **npm** | `actions/setup-node@v4` · `cache: npm` |
+| **Lockfile path** | `cache-dependency-path: app/package-lock.json` |
+| **Docker** | `cache-from: type=gha` · `cache-to: type=gha,mode=max` |
 
 ---
 
 ## Matrix Strategy
 
-**Not used** — single `ubuntu-latest` runner, Java 17 only.
+**Not used** — single `ubuntu-latest` runner, Node.js 20 only.
 
-**Reason:** Single-module Spring Boot service; `pom.xml` pins Java 17. No multi-version or multi-OS requirement.
+**Reason:** Single demo service with one supported Node LTS version. A matrix (e.g. Node 20 + 22) can be added if multi-version coverage is required.
 
 ---
 
 ## Verification — Success Run
 
-### act
-
-`act` is **not installed** on this machine (`which act` → not found). Verification used **manual equivalent** (workflow commands run directly).
-
-### Lint (manual)
+### act (attempted)
 
 | Field | Value |
 | ----- | ----- |
-| Command | `cd bo-migration-service && mvn -B validate compile` |
-| Exit code | **0** |
-| Output | `BUILD SUCCESS` (Total time: ~0.9s) |
-
-### Test (manual)
-
-| Field | Value |
-| ----- | ----- |
-| Command | `mvn -B test` |
-| Exit code | **0** |
-| Output | `Tests run: 27, Failures: 0, Errors: 0, Skipped: 0` — `BUILD SUCCESS` |
-
-### Build (manual)
-
-| Field | Value |
-| ----- | ----- |
-| Command | `docker build -t bo-migration-service:<short-sha> .` |
+| Command | `act push -W .github/workflows/build.yml -j lint` |
 | Exit code | **1** |
-| Output | `failed to resolve reference "docker.io/library/maven:3.9.6-eclipse-temurin-17": tls: failed to verify certificate: x509: certificate signed by unknown authority` |
+| Output | `failed to start container: ... mkdir /Users/rohitverma/.colima/docker.sock: operation not supported` |
 
-**Interpretation:** Lint and test succeed locally. Docker build blocked by TLS/certificate issue pulling base image from Colima environment — workflow YAML is valid; build job expected to pass on GitHub-hosted runners with normal registry access.
+**Interpretation:** `act` 0.2.89 installed; run blocked by Colima Docker socket mount on this machine. Manual pipeline commands used as equivalent verification per agent rules.
+
+### Lint (manual — workflow equivalent)
+
+| Field | Value |
+| ----- | ----- |
+| Command | `cd app && npm ci && npm run lint` |
+| Exit code | **0** |
+| Output | ESLint completed with no errors |
+
+### Test (manual — workflow equivalent)
+
+| Field | Value |
+| ----- | ----- |
+| Command | `npm test` |
+| Exit code | **0** |
+| Output | |
+
+```
+ℹ tests 3
+ℹ suites 2
+ℹ pass 3
+ℹ fail 0
+ℹ duration_ms 212.169334
+```
+
+### Docker build (manual — workflow equivalent)
+
+| Field | Value |
+| ----- | ----- |
+| Command | `docker build -t d3-ci-demo-app:8254d73 -t d3-ci-demo-app:sha-8254d73 ./app` |
+| Exit code | **0** |
+| Output | |
+
+```
+Successfully built 37e22adf7400
+Successfully tagged d3-ci-demo-app:8254d73
+Successfully tagged d3-ci-demo-app:sha-8254d73
+BUILD_EXIT=0
+```
+
+| Image | Tag | Size |
+| ----- | --- | ---- |
+| d3-ci-demo-app | 8254d73 | 203MB |
+| d3-ci-demo-app | sha-8254d73 | 203MB |
 
 ---
 
-## Failure Demo
+## Failure Demonstration
 
 | Field | Value |
 | ----- | ----- |
-| Intentional change | Temporarily replaced `HealthControllerTest.healthReturnsOk()` with `Assertions.fail("intentional CI failure demo")` |
-| Command | `mvn -B test -Dtest=HealthControllerTest` |
+| Intentional change | Replaced health test assertion with `assert.fail("intentional CI failure demo")` in `app/src/health.test.js` |
+| Command | `npm test` |
 | Exit code | **1** |
-| Failing output | |
+| Output | |
 
 ```
-[ERROR] Failures: 
-[ERROR]   HealthControllerTest.ciFailureDemo:22 intentional CI failure demo
-[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
-[INFO] BUILD FAILURE
-[ERROR] Failed to execute goal ... maven-surefire-plugin:3.1.2:test ... There are test failures.
+✖ returns ok status (1.067291ms)
+  AssertionError [ERR_ASSERTION]: intentional CI failure demo
+
+ℹ tests 3
+ℹ pass 2
+ℹ fail 1
 ```
 
-| Pipeline behaviour | Test job fails; `build` job would not run (`needs: test`). Fail-fast on surefire failure. |
+| Pipeline behaviour | Test job fails with exit 1. In GitHub Actions, `build` job would not run (`needs: test`). Fail-fast on test failure. |
 
 ---
 
@@ -128,10 +158,19 @@ Key features:
 
 | Field | Value |
 | ----- | ----- |
-| Fix applied | Restored `HealthControllerTest.java` to original `healthReturnsOk()` assertion |
-| Command | `mvn -B test` |
+| Fix applied | Restored `app/src/health.test.js` to original assertions |
+| Command | `npm test && npm run lint` |
 | Exit code | **0** |
-| Output | `Tests run: 27, Failures: 0, Errors: 0, Skipped: 0` — `BUILD SUCCESS` |
+| Output | |
+
+```
+ℹ pass 3
+ℹ fail 0
+RECOVERY_TEST_EXIT=0
+RECOVERY_LINT_EXIT=0
+```
+
+All pipeline stages green again after fix.
 
 ---
 
@@ -139,40 +178,67 @@ Key features:
 
 ### Verified
 
-- `.github/workflows/build.yml` created with lint, test, build, tag stages on `push`.
-- `mvn -B validate compile` exits 0.
-- `mvn -B test` exits 0 (27 tests).
-- Intentional test failure produces exit 1 and surefire failure output.
-- Recovery restores green test run.
-- `docs/CI.md` documents stages, cache, local commands, act usage.
+- `.github/workflows/build.yml` created with lint, test, build jobs on push and pull_request.
+- npm cache configuration present in workflow YAML.
+- Docker GHA cache configuration present in workflow YAML.
+- `npm run lint` exits **0**.
+- `npm test` exits **0** (3 tests pass).
+- `docker build` exits **0** with SHA tags applied locally.
+- Intentional test failure produces exit **1** with surefire-style node:test output.
+- Recovery restores green lint + test runs.
+- `README.md` documents workflow, cache, local run, and act usage.
 
 ### Inferred
 
-- GitHub Actions hosted runners will pull `maven:3.9.6-eclipse-temurin-17` and complete Docker build where local Colima TLS issue does not apply.
-- Repo docs reference `make lint` / spotless / `./mvnw verify`; current `pom.xml` on this branch uses simpler Maven goals — workflow uses `validate compile` + `test` matching **actual** pom capabilities.
+- GitHub-hosted runners will execute all three jobs successfully when workflow is placed at repo root `.github/workflows/`.
+- Docker build on GitHub Actions will succeed with normal registry access (local build verified).
+- `act` would run all jobs on environments without Colima socket mount issues.
 
 ### Unknown
 
-- Full `act push` run not executed (act not installed).
-- Docker build not verified end-to-end locally due to registry TLS error.
-- Whether org wants ECR push step (existing `infra/docker-build.sh` / Jenkins) integrated into this GHA workflow.
+- Full `act push` end-to-end run not completed (Colima socket mount failure).
+- Whether org wants container registry push (ECR/GHCR) integrated — not configured (`push: false`).
+
+---
+
+## Local Verification (manual run)
+
+A presentable record of the latest local lint + test run is in [`run-status.md`](run-status.md).
+
+| Field | Value |
+| ----- | ----- |
+| Verified by | rohitverma · PMLMBT4677 |
+| Command | `cd app && npm ci && npm run lint && npm test` |
+| Exit code | **0** |
+| Lint | ESLint pass (no errors) |
+| Tests | **3 passed · 0 failed** |
 
 ---
 
 ## Manual Verification Notes
 
 ```bash
-# On GitHub after push — expected green lint + test; build if runner can reach Docker Hub
-git add .github/workflows/build.yml docs/CI.md
-git push
+cd Infra-and-DevOps/D3_Ci_pipiline_that_lints/app
+npm ci && npm run lint && npm test
 
-# Local parity
-mvn -B validate compile && mvn -B test
+cd ..
+SHORT_SHA=$(git rev-parse --short HEAD)
+docker build -t d3-ci-demo-app:${SHORT_SHA} ./app
 
-# Install act (optional)
-brew install act
-act push -j lint -W .github/workflows/build.yml
-act push -j test -W .github/workflows/build.yml
+# act (optional — may fail on Colima)
+cd Infra-and-DevOps/D3_Ci_pipiline_that_lints
+act push -W .github/workflows/build.yml -j lint
+act push -W .github/workflows/build.yml -j test
+act push -W .github/workflows/build.yml -j build
 ```
 
-To add ECR push, extend `build` job with AWS credentials and `push: true` aligned with `infra/docker-build.sh`.
+### Success criteria status
+
+| Criterion | Status |
+| --------- | ------ |
+| Workflow file exists | **Pass** |
+| Lint, test, build, tag stages defined | **Pass** |
+| Successful run captured | **Pass** (manual equivalent) |
+| Failure demo captured | **Pass** |
+| Recovery green run captured | **Pass** |
+| Report with cache/matrix docs | **Pass** |

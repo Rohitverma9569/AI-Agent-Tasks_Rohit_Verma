@@ -1,0 +1,21 @@
+{
+  "name": "d3-ci-demo-app",
+  "version": "1.0.0",
+  "description": "D3 CI pipeline demo service",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src/",
+    "test": "node --test src/**/*.test.js",
+    "start": "node src/index.js",
+    "ci": "npm run lint && npm test"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.17.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
