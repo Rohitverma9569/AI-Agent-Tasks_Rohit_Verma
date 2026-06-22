@@ -2,15 +2,24 @@
 
 import { useEffect } from "react";
 import type { Agent, Category } from "@/types/agent";
+import { githubBlobUrl } from "@/types/agent";
 import { CopyButton } from "./CopyButton";
 
 type Props = {
   agent: Agent;
   category?: Category;
+  githubRepo?: string;
   onClose: () => void;
 };
 
-export function AgentDetailPanel({ agent, category, onClose }: Props) {
+const DOC_LABELS: Record<string, string> = {
+  readme: "README",
+  status: "STATUS",
+  localTesting: "local-testing",
+  validationResults: "validation-results",
+};
+
+export function AgentDetailPanel({ agent, category, githubRepo, onClose }: Props) {
   const accent = category?.accent ?? "#10b981";
 
   useEffect(() => {
@@ -24,6 +33,10 @@ export function AgentDetailPanel({ agent, category, onClose }: Props) {
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [onClose]);
+
+  const docEntries = agent.docs
+    ? Object.entries(agent.docs).filter(([, path]) => Boolean(path))
+    : [];
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
@@ -53,6 +66,16 @@ export function AgentDetailPanel({ agent, category, onClose }: Props) {
               {category ? (
                 <span className="text-xs font-medium text-zinc-500">{category.label}</span>
               ) : null}
+              {agent.status === "complete" ? (
+                <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-400">
+                  Complete
+                </span>
+              ) : null}
+              {agent.type === "runnable" ? (
+                <span className="rounded-full bg-blue-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-400">
+                  Runnable
+                </span>
+              ) : null}
             </div>
             <h2 id="agent-detail-title" className="text-2xl font-bold text-zinc-100">
               {agent.title}
@@ -77,6 +100,88 @@ export function AgentDetailPanel({ agent, category, onClose }: Props) {
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 py-5">
+          {agent.runnable ? (
+            <Section title="Runnable demo">
+              <dl className="grid gap-3 text-sm sm:grid-cols-2">
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-600">Stack</dt>
+                  <dd className="mt-1 text-zinc-300">{agent.runnable.stack}</dd>
+                </div>
+                {agent.runnable.testSummary ? (
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-600">Tests</dt>
+                    <dd className="mt-1 text-zinc-300">{agent.runnable.testSummary}</dd>
+                  </div>
+                ) : null}
+                {agent.runnable.verifiedAt ? (
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-600">Verified</dt>
+                    <dd className="mt-1 text-zinc-300">{agent.runnable.verifiedAt}</dd>
+                  </div>
+                ) : null}
+                {agent.runnable.port ? (
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-600">Port</dt>
+                    <dd className="mt-1 font-mono text-zinc-300">{agent.runnable.port}</dd>
+                  </div>
+                ) : null}
+                {agent.runnable.ports ? (
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-600">Ports</dt>
+                    <dd className="mt-1 font-mono text-zinc-300">{agent.runnable.ports.join(", ")}</dd>
+                  </div>
+                ) : null}
+                {agent.runnable.cliHint ? (
+                  <div className="sm:col-span-2">
+                    <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-600">CLI</dt>
+                    <dd className="mt-1 font-mono text-xs text-zinc-300">{agent.runnable.cliHint}</dd>
+                  </div>
+                ) : null}
+              </dl>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {agent.runnable.localUrl ? (
+                  <a
+                    href={agent.runnable.localUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-emerald-400 transition hover:border-emerald-500/40"
+                  >
+                    Local Swagger / API
+                  </a>
+                ) : null}
+                {agent.runnable.engineUrl ? (
+                  <a
+                    href={agent.runnable.engineUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-emerald-400 transition hover:border-emerald-500/40"
+                  >
+                    Rust engine health
+                  </a>
+                ) : null}
+              </div>
+            </Section>
+          ) : null}
+
+          {docEntries.length > 0 && githubRepo ? (
+            <Section title="Project docs">
+              <ul className="flex flex-wrap gap-2">
+                {docEntries.map(([key, relPath]) => (
+                  <li key={key}>
+                    <a
+                      href={githubBlobUrl(githubRepo, relPath)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-zinc-600 hover:text-emerald-400"
+                    >
+                      {DOC_LABELS[key] ?? key}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          ) : null}
+
           <Section title="Description">
             <p className="text-sm leading-relaxed text-zinc-300">{agent.description}</p>
           </Section>
@@ -158,7 +263,20 @@ export function AgentDetailPanel({ agent, category, onClose }: Props) {
             <dl className="space-y-3 text-sm">
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-600">Agent file</dt>
-                <dd className="mt-1 font-mono text-xs text-zinc-400">{agent.agentFile}</dd>
+                <dd className="mt-1 font-mono text-xs text-zinc-400">
+                  {githubRepo ? (
+                    <a
+                      href={githubBlobUrl(githubRepo, agent.agentFile)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-400/90 hover:underline"
+                    >
+                      {agent.agentFile}
+                    </a>
+                  ) : (
+                    agent.agentFile
+                  )}
+                </dd>
               </div>
               {agent.skillPath ? (
                 <div>

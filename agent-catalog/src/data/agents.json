@@ -1,4 +1,14 @@
 {
+  "meta": {
+    "totalAgents": 24,
+    "completedAgents": 24,
+    "runnableProjects": 5,
+    "githubRepo": "https://github.com/Rohitverma9569/AI-Agent-Tasks_Rohit_Verma",
+    "docsHub": "docs/README.md",
+    "gettingStarted": "docs/getting-started.md",
+    "runnableProjectsDoc": "docs/runnable-projects.md",
+    "projectStatus": "docs/project-status.md"
+  },
   "categories": [
     {
       "id": "basic",
@@ -58,7 +68,12 @@
         "/multi-worktree-plan ~/Downloads/bo-migration-service Add bulk export API for migration status",
         "/multi-worktree-plan ~/my-app Refactor auth module to JWT — split across contract, service, and tests",
         "/multi-worktree-plan ~/my-app — user describes task in follow-up"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Advanced-parallel agent operator and system builder/A1_Multi-worktree_parallel_plan/README.md"
+      }
     },
     {
       "id": "parallel-worktree-execute",
@@ -101,7 +116,12 @@
         "/parallel-worktree-execute ~/Downloads/bo-migration-service — execute Lane A and Lane B from A1 export plan",
         "/parallel-worktree-execute ~/Downloads/bo-migration-service Execute contract lane + repository lane for bulk export API",
         "/parallel-worktree-execute ~/my-app Lane 1: add health endpoint, Lane 2: add metrics config"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Advanced-parallel agent operator and system builder/A2_Execute_two_parallel_worktrees/README.md"
+      }
     },
     {
       "id": "fraud-score-system",
@@ -153,7 +173,25 @@
           "purpose": "Execution proof"
         }
       ],
-      "invocation": []
+      "invocation": [],
+      "type": "runnable",
+      "status": "complete",
+      "docs": {
+        "readme": "Advanced-parallel agent operator and system builder/A3_Fraud_Score_system/README.md",
+        "localTesting": "Advanced-parallel agent operator and system builder/A3_Fraud_Score_system/docs/local-testing.md",
+        "validationResults": "Advanced-parallel agent operator and system builder/A3_Fraud_Score_system/validation-results.md"
+      },
+      "runnable": {
+        "stack": "FastAPI + Node + Rust",
+        "ports": [
+          8000,
+          3001
+        ],
+        "localUrl": "http://127.0.0.1:8000/docs",
+        "engineUrl": "http://127.0.0.1:3001/health",
+        "testSummary": "make verify",
+        "verifiedAt": "2026-06-17"
+      }
     },
     {
       "id": "repository-modernization",
@@ -195,7 +233,12 @@
       "invocation": [
         "/repository-modernization ../A3_Fraud_Score_system",
         "/repository-modernization ~/Downloads/bo-migration-service"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Advanced-parallel agent operator and system builder/A4_Repository_Modernization_Plan/README.md"
+      }
     },
     {
       "id": "adversarial-code-review",
@@ -238,7 +281,12 @@
         "/adversarial-code-review ~/Downloads/bo-migration-service",
         "/adversarial-code-review ../A3_Fraud_Score_system services/fastapi scoring endpoint",
         "/adversarial-code-review . diff:uncommitted changes from last agent run"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Advanced-parallel agent operator and system builder/A5_Agent_Code_Review/README.md"
+      }
     },
     {
       "id": "performance-profiling",
@@ -278,7 +326,12 @@
       "invocation": [
         "/performance-profiling ~/Downloads/bo-migration-service bulk CSV import",
         "/performance-profiling ../A3_Fraud_Score_system/engines/rust scoring hot path"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Advanced-parallel agent operator and system builder/A6_Performence_Profiling/README.md"
+      }
     },
     {
       "id": "repo-inventory",
@@ -324,7 +377,13 @@
         "/repo-inventory ~/Downloads/bo-migration-service",
         "/repo-inventory — scan Backend/ in this MERN repo",
         "/repo-inventory https://github.com/org/service — clone first, then analyze"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Basic-repo-reader-and-builder/B1_Repo_Artifact_Inventory/README.md",
+        "status": "Basic-repo-reader-and-builder/B1_Repo_Artifact_Inventory/STATUS.md"
+      }
     },
     {
       "id": "api-endpoint-map",
@@ -355,7 +414,13 @@
         "/api-endpoint-map ~/Downloads/bo-migration-service",
         "/api-endpoint-map — map all REST endpoints in Backend/",
         "/api-endpoint-map https://github.com/org/service — clone first, then analyze"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Basic-repo-reader-and-builder/B2_API_endpoint_map/README.md",
+        "status": "Basic-repo-reader-and-builder/B2_API_endpoint_map/STATUS.md"
+      }
     },
     {
       "id": "test-discovery",
@@ -393,7 +458,13 @@
         "/test-discovery ~/Downloads/bo-migration-service",
         "/test-discovery — discover and run tests in Backend/",
         "/test-discovery https://github.com/org/service — clone first, then analyze"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Basic-repo-reader-and-builder/B3_Test_discovery_and_execution/README.md",
+        "status": "Basic-repo-reader-and-builder/B3_Test_discovery_and_execution/STATUS.md"
+      }
     },
     {
       "id": "fastapi-builder",
@@ -411,15 +482,30 @@
       "tasks": [],
       "rules": [
         "Do not skip tests.",
-        "Show actual execution results in `validation-results.md`.",
+        "Show actual execution results in `validation-results.md` and `local-testing.md`.",
         "Keep code in `app/` and tests in `tests/` — no stray scripts unless requested.",
         "Never claim tests passed without terminal evidence."
       ],
       "deliverables": [],
       "invocation": [
-        "/fastapi-builder — run pytest and update validation-results.md",
+        "/fastapi-builder — run pytest and update validation-results.md and local-testing.md",
         "/fastapi-builder add pagination to GET /transactions"
-      ]
+      ],
+      "type": "runnable",
+      "status": "complete",
+      "docs": {
+        "readme": "Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service/README.md",
+        "status": "Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service/STATUS.md",
+        "localTesting": "Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service/local-testing.md",
+        "validationResults": "Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service/validation-results.md"
+      },
+      "runnable": {
+        "stack": "Python · FastAPI",
+        "port": 8001,
+        "localUrl": "http://127.0.0.1:8001/docs",
+        "testSummary": "pytest 5/5",
+        "verifiedAt": "2026-06-22"
+      }
     },
     {
       "id": "nodejs-builder",
@@ -437,14 +523,29 @@
       "tasks": [],
       "rules": [
         "Must include minimum 3 tests.",
-        "Show evidence of execution in `validation-results.md`.",
+        "Show evidence of execution in `validation-results.md` and `local-testing.md`.",
         "Never claim tests passed without terminal output."
       ],
       "deliverables": [],
       "invocation": [
-        "/nodejs-builder — run npm test and update validation-results.md",
+        "/nodejs-builder — run npm test and update validation-results.md and local-testing.md",
         "/nodejs-builder add pagination to GET /transactions"
-      ]
+      ],
+      "type": "runnable",
+      "status": "complete",
+      "docs": {
+        "readme": "Basic-repo-reader-and-builder/B5_Node.js_greenfield_API/README.md",
+        "status": "Basic-repo-reader-and-builder/B5_Node.js_greenfield_API/STATUS.md",
+        "localTesting": "Basic-repo-reader-and-builder/B5_Node.js_greenfield_API/local-testing.md",
+        "validationResults": "Basic-repo-reader-and-builder/B5_Node.js_greenfield_API/validation-results.md"
+      },
+      "runnable": {
+        "stack": "Node.js · Express",
+        "port": 3000,
+        "localUrl": "http://localhost:3000/docs",
+        "testSummary": "Jest 18/18",
+        "verifiedAt": "2026-06-22"
+      }
     },
     {
       "id": "rust-log-analyzer",
@@ -466,7 +567,21 @@
         "Follow Rust best practices."
       ],
       "deliverables": [],
-      "invocation": []
+      "invocation": [],
+      "type": "runnable",
+      "status": "complete",
+      "docs": {
+        "readme": "Basic-repo-reader-and-builder/B6_Rust_greenfield/README.md",
+        "status": "Basic-repo-reader-and-builder/B6_Rust_greenfield/STATUS.md",
+        "localTesting": "Basic-repo-reader-and-builder/B6_Rust_greenfield/local-testing.md",
+        "validationResults": "Basic-repo-reader-and-builder/B6_Rust_greenfield/validation-results.md"
+      },
+      "runnable": {
+        "stack": "Rust · cargo",
+        "testSummary": "cargo 6/6",
+        "verifiedAt": "2026-06-22",
+        "cliHint": "cargo run -- sample.log"
+      }
     },
     {
       "id": "terraform-plan",
@@ -488,7 +603,9 @@
         "/terraform-plan ~/Downloads/bo-migration-service aws",
         "/terraform-plan . — greenfield S3 + Lambda + API Gateway in ./terraform",
         "/terraform-plan — local cloud-neutral stack when AWS credentials unavailable"
-      ]
+      ],
+      "type": "report",
+      "status": "complete"
     },
     {
       "id": "docker-compose-stack",
@@ -521,7 +638,12 @@
         "/docker-compose-stack ~/Downloads/bo-migration-service",
         "/docker-compose-stack . — greenfield API + Postgres + worker",
         "/docker-compose-stack ../Advanced-parallel agent operator and system builder/A3_Fraud_Score_system"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Infra-and-DevOps/D2_Docker-Compose_Stack/README.md"
+      }
     },
     {
       "id": "ci-pipeline",
@@ -549,7 +671,12 @@
         "/ci-pipeline ~/Downloads/bo-migration-service github",
         "/ci-pipeline . gitlab",
         "/ci-pipeline ../A3_Fraud_Score_system"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Infra-and-DevOps/D3_Ci_pipiline_that_lints/README.md"
+      }
     },
     {
       "id": "kubernetes-deployment",
@@ -578,7 +705,12 @@
         "/kubernetes-deployment ~/Downloads/bo-migration-service kind",
         "/kubernetes-deployment . minikube",
         "/kubernetes-deployment ../A3_Fraud_Score_system"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Infra-and-DevOps/D4_Kubernetes_Deployment/README.md"
+      }
     },
     {
       "id": "reproducible-dev-environment",
@@ -609,36 +741,51 @@
         "/reproducible-dev-environment . devcontainer",
         "/reproducible-dev-environment ../A3_Fraud_Score_system nix",
         "/reproducible-dev-environment"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Infra-and-DevOps/D5_Reproducible_dev_environment/README.md"
+      }
     },
     {
       "id": "observability",
       "code": "D6",
       "title": "Observability Bolt-On with Metrics Agent (D6)",
       "name": "observability",
-      "description": "Add structured logging, /metrics, Prometheus, and Grafana dashboard to a service with load-test proof and live dashboard evidence. Use when the user types /observability or asks for Prometheus, Grafana, metrics endpoint, or SRE observability stack.",
-      "slashCommand": "/observability [{target-path}]",
+      "description": "Add structured logging, Prometheus metrics endpoint, Prometheus scraping, Grafana dashboard provisioning, load generation, and evidence-backed verification to an existing application. Use when the user types /observability or asks for Prometheus, Grafana, metrics endpoint, or observability bolt-on with live dashboard proof.",
+      "slashCommand": "/observability [{target-path}] [{stack-hint}]",
       "skillPath": ".cursor/skills/observability/SKILL.md",
       "category": "devops",
       "path": "Infra-and-DevOps/D6_Observability_bolt_on_with_metrics",
       "agentFile": "Infra-and-DevOps/D6_Observability_bolt_on_with_metrics/agent.md",
-      "role": "Site Reliability Engineer.",
-      "objective": "Add **observability** to a service and **prove metrics are visible in Grafana** with captured evidence — not assumptions.",
+      "role": "Site Reliability Engineer and Observability Specialist. ---",
+      "objective": "Add **observability** to an existing application and prove — with captured command output — that: 1. Structured logging is configured 2. A metrics endpoint responds with Prometheus exposition format 3. Prometheus scrapes the application successfully 4. Grafana is provisioned with datasource and dashboard 5. Load generation produces measurable metric changes 6. Dashboard panels reflect live traffic Do not claim success without execution evidence. ---",
       "tasks": [],
       "rules": [
-        "**Metrics must be real** — instrumented in application code or framework middleware; no hand-crafted static exposition files.",
-        "**Dashboard must use live data** — prove with load test + Prometheus scrape + Grafana panel values or screenshot.",
-        "**Show evidence, not assumptions** — capture command output, exit codes, target health, metric samples.",
+        "**Never claim metrics work** without curl proof and sample exposition output.",
+        "**Never claim Prometheus works** without scrape target UP evidence.",
+        "**Never claim Grafana works** without datasource + dashboard file evidence.",
+        "**Never claim dashboard updates** without load test + before/after metric or screenshot proof.",
+        "**Prefer existing observability tooling** if already present — extend, do not duplicate.",
+        "**Metrics must be real** — instrumented in application code; no hand-crafted static `.prom` files.",
+        "**Touch only observability-related code** — surface unrelated issues as findings; do not fix silently.",
         "Do not commit unless the user asks.",
-        "Do not deploy to production monitoring unless explicitly requested — local docker-compose only by default.",
-        "Touch only observability-related code and config; surface unrelated issues as findings, do not fix silently."
+        "Do not deploy to external/production monitoring — local Docker Compose only by default."
       ],
       "deliverables": [],
       "invocation": [
-        "/observability ~/Downloads/bo-migration-service",
-        "/observability .",
-        "/observability ../A3_Fraud_Score_system"
-      ]
+        "/observability Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service",
+        "/observability ~/Downloads/bo-migration-service spring-boot",
+        "/observability Infra-and-DevOps/D2_Docker-Compose_Stack/api node",
+        "/observability ."
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Infra-and-DevOps/D6_Observability_bolt_on_with_metrics/README.md",
+        "localTesting": "Infra-and-DevOps/D6_Observability_bolt_on_with_metrics/docs/local-testing.md"
+      }
     },
     {
       "id": "er-diagram",
@@ -668,7 +815,12 @@
         "/er-diagram ~/Downloads/bo-migration-service",
         "/er-diagram — extract ER diagram from Backend/ schema and entities",
         "/er-diagram https://github.com/org/service — clone first, then analyze"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Intermediate-repo operator and polyglot builder/I1_ER_diagram_from_repo/README.md"
+      }
     },
     {
       "id": "flow-trace",
@@ -709,7 +861,12 @@
         "/flow-trace ~/Downloads/bo-migration-service — list endpoints, then trace GET /migration/status",
         "/flow-trace ~/my-app @Scheduled cleanupExpiredSessions",
         "/flow-trace ~/my-app KafkaConsumer#handleOrderEvent"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Intermediate-repo operator and polyglot builder/I2_End_to_end_flow_trace/README.md"
+      }
     },
     {
       "id": "small-safe-change",
@@ -740,7 +897,12 @@
         "/small-safe-change ~/Downloads/bo-migration-service — return 404 instead of null when user not found on GET /v1/getMigrationStatus/byUserId/{userId}",
         "/small-safe-change ~/my-app Add validation message when cluster is missing on migrateUser",
         "/small-safe-change ~/my-app — user will describe change in follow-up message"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Intermediate-repo operator and polyglot builder/I3_Small_safe_change/README.md"
+      }
     },
     {
       "id": "polyglot-service-pair",
@@ -783,7 +945,22 @@
       ],
       "invocation": [
         "/polyglot-service-pair"
-      ]
+      ],
+      "type": "runnable",
+      "status": "complete",
+      "docs": {
+        "readme": "Intermediate-repo operator and polyglot builder/I4/README.md",
+        "status": "Intermediate-repo operator and polyglot builder/I4/STATUS.md",
+        "localTesting": "Intermediate-repo operator and polyglot builder/I4/local-testing.md",
+        "validationResults": "Intermediate-repo operator and polyglot builder/I4/validation-results.md"
+      },
+      "runnable": {
+        "stack": "FastAPI + Node CLI",
+        "port": 8000,
+        "localUrl": "http://127.0.0.1:8000/docs",
+        "testSummary": "pytest 9/9 + CLI",
+        "verifiedAt": "2026-06-22"
+      }
     },
     {
       "id": "dockerization",
@@ -814,7 +991,13 @@
       "invocation": [
         "/dockerization Intermediate-repo operator and polyglot builder/I4/services/fastapi",
         "/dockerization — containerize the FastAPI currency service in I4"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Intermediate-repo operator and polyglot builder/I5_Polyglot_service_pair/README.md",
+        "status": "Intermediate-repo operator and polyglot builder/I5_Polyglot_service_pair/STATUS.md"
+      }
     },
     {
       "id": "bug-diagnosis",
@@ -844,8 +1027,14 @@
         "/bug-diagnosis ~/Downloads/bo-migration-service GET byUserId returns 200 with defaults instead of 404 for missing user",
         "/bug-diagnosis ~/my-app NullPointerException when cluster is null on migrateUser",
         "/bug-diagnosis ~/my-app — user describes bug in follow-up message"
-      ]
+      ],
+      "type": "report",
+      "status": "complete",
+      "docs": {
+        "readme": "Intermediate-repo operator and polyglot builder/I6_Dockerize_and_run/README.md",
+        "status": "Intermediate-repo operator and polyglot builder/I6_Dockerize_and_run/STATUS.md"
+      }
     }
   ],
-  "generatedAt": "2026-06-20T20:10:54.738Z"
+  "generatedAt": "2026-06-22T06:44:33.784Z"
 }

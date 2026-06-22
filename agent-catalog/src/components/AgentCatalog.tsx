@@ -14,7 +14,9 @@ export function AgentCatalog({ data }: { data: AgentsData }) {
     const q = query.trim().toLowerCase();
     return data.agents.filter((agent) => {
       const matchesCategory =
-        activeCategory === "all" || agent.category === activeCategory;
+        activeCategory === "all" ||
+        (activeCategory === "runnable" && agent.type === "runnable") ||
+        agent.category === activeCategory;
       const matchesQuery =
         !q ||
         agent.title.toLowerCase().includes(q) ||
@@ -30,6 +32,7 @@ export function AgentCatalog({ data }: { data: AgentsData }) {
   const selectedCategory = selectedAgent
     ? categoryMap[selectedAgent.category]
     : undefined;
+  const runnableCount = data.meta?.runnableProjects ?? data.agents.filter((a) => a.type === "runnable").length;
 
   return (
     <>
@@ -75,6 +78,17 @@ export function AgentCatalog({ data }: { data: AgentsData }) {
             }`}
           >
             All
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveCategory("runnable")}
+            className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+              activeCategory === "runnable"
+                ? "bg-blue-500 text-zinc-950"
+                : "border border-zinc-800 bg-zinc-900 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200"
+            }`}
+          >
+            Runnable ({runnableCount})
           </button>
           {data.categories.map((cat) => (
             <button
@@ -149,6 +163,7 @@ export function AgentCatalog({ data }: { data: AgentsData }) {
         <AgentDetailPanel
           agent={selectedAgent}
           category={selectedCategory}
+          githubRepo={data.meta?.githubRepo}
           onClose={() => setSelectedAgent(null)}
         />
       ) : null}

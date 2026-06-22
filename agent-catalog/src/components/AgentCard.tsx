@@ -34,11 +34,31 @@ export function AgentCard({ agent, category, onSelect }: Props) {
           >
             {agent.code}
           </span>
-          <code className="truncate text-sm font-medium text-emerald-400">{agent.slashCommand}</code>
+          <code className="truncate text-sm font-medium text-emerald-400">
+            {agent.slashCommand}
+          </code>
         </div>
         <div onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
           <CopyButton text={agent.slashCommand.split(" ")[0]} />
         </div>
+      </div>
+
+      <div className="mb-2 flex flex-wrap gap-1.5">
+        {agent.status === "complete" ? (
+          <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-400">
+            Complete
+          </span>
+        ) : null}
+        {agent.type === "runnable" ? (
+          <span className="rounded-full bg-blue-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-400">
+            Runnable
+          </span>
+        ) : null}
+        {agent.runnable?.testSummary ? (
+          <span className="rounded-full bg-zinc-800 px-2 py-0.5 text-[10px] font-medium text-zinc-400">
+            {agent.runnable.testSummary}
+          </span>
+        ) : null}
       </div>
 
       <h3 className="text-lg font-semibold leading-snug text-zinc-100 group-hover:text-white">

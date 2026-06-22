@@ -5,6 +5,9 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "../..");
 
+const GITHUB_REPO =
+  "https://github.com/Rohitverma9569/AI-Agent-Tasks_Rohit_Verma";
+
 const CATEGORIES = [
   {
     id: "basic",
@@ -36,8 +39,49 @@ const CATEGORIES = [
   },
 ];
 
+/** Runnable project metadata aligned with docs/runnable-projects.md */
+const RUNNABLE_META = {
+  B4: {
+    stack: "Python · FastAPI",
+    port: 8001,
+    localUrl: "http://127.0.0.1:8001/docs",
+    testSummary: "pytest 5/5",
+    verifiedAt: "2026-06-22",
+  },
+  B5: {
+    stack: "Node.js · Express",
+    port: 3000,
+    localUrl: "http://localhost:3000/docs",
+    testSummary: "Jest 18/18",
+    verifiedAt: "2026-06-22",
+  },
+  B6: {
+    stack: "Rust · cargo",
+    testSummary: "cargo 6/6",
+    verifiedAt: "2026-06-22",
+    cliHint: "cargo run -- sample.log",
+  },
+  I4: {
+    stack: "FastAPI + Node CLI",
+    port: 8000,
+    localUrl: "http://127.0.0.1:8000/docs",
+    testSummary: "pytest 9/9 + CLI",
+    verifiedAt: "2026-06-22",
+  },
+  A3: {
+    stack: "FastAPI + Node + Rust",
+    ports: [8000, 3001],
+    localUrl: "http://127.0.0.1:8000/docs",
+    engineUrl: "http://127.0.0.1:3001/health",
+    testSummary: "make verify",
+    verifiedAt: "2026-06-17",
+  },
+};
+
 function extractSection(body, heading) {
-  const regex = new RegExp(`## ${heading}\\n\\n([\\s\\S]*?)(?=\\n## |\\n### [A-Z]|$)`);
+  const regex = new RegExp(
+    `## ${heading}\\n\\n([\\s\\S]*?)(?=\\n## |\\n### [A-Z]|$)`,
+  );
   const match = body.match(regex);
   return match?.[1]?.trim() ?? "";
 }
@@ -84,6 +128,27 @@ function parseFrontmatter(raw) {
   return { name, description };
 }
 
+function detectDocs(agentDir, relPath) {
+  const docs = {};
+  const candidates = [
+    ["readme", "README.md"],
+    ["status", "STATUS.md"],
+    ["localTesting", "local-testing.md"],
+    ["localTesting", "docs/local-testing.md"],
+    ["validationResults", "validation-results.md"],
+  ];
+
+  for (const [key, file] of candidates) {
+    if (docs[key]) continue;
+    const full = path.join(agentDir, file);
+    if (fs.existsSync(full)) {
+      docs[key] = path.join(relPath, file).replace(/\\/g, "/");
+    }
+  }
+
+  return Object.keys(docs).length > 0 ? docs : undefined;
+}
+
 function parseAgentMd(filePath, category, folderName) {
   const raw = fs.readFileSync(filePath, "utf8");
   const body = raw.replace(/^---[\s\S]*?---\n/, "");
@@ -117,7 +182,11 @@ function parseAgentMd(filePath, category, folderName) {
   const invocation = extractInvocation(invocationSection);
 
   const code = folderName.match(/^([A-Z]\d+)/)?.[1] ?? "";
-  const relPath = path.relative(repoRoot, path.dirname(filePath));
+  const agentDir = path.dirname(filePath);
+  const relPath = path.relative(repoRoot, agentDir);
+  const docs = detectDocs(agentDir, relPath);
+  const runnableMeta = RUNNABLE_META[code];
+  const type = runnableMeta ? "runnable" : "report";
 
   return {
     id: name || folderName,
@@ -136,6 +205,10 @@ function parseAgentMd(filePath, category, folderName) {
     rules,
     deliverables,
     invocation,
+    type,
+    status: "complete",
+    ...(docs ? { docs } : {}),
+    ...(runnableMeta ? { runnable: runnableMeta } : {}),
   };
 }
 
@@ -156,6 +229,8 @@ const agents = CATEGORIES.flatMap(({ id, dir }) =>
   ),
 ).sort((a, b) => a.code.localeCompare(b.code));
 
+const runnableCount = agents.filter((a) => a.type === "runnable").length;
+
 const outDir = path.join(__dirname, "../src/data");
 const outFile = path.join(outDir, "agents.json");
 fs.mkdirSync(outDir, { recursive: true });
@@ -173,7 +248,21 @@ if (agents.length === 0 && fs.existsSync(outFile)) {
 fs.writeFileSync(
   outFile,
   JSON.stringify(
-    { categories: CATEGORIES, agents, generatedAt: new Date().toISOString() },
+    {
+      meta: {
+        totalAgents: agents.length,
+        completedAgents: agents.length,
+        runnableProjects: runnableCount,
+        githubRepo: GITHUB_REPO,
+        docsHub: "docs/README.md",
+        gettingStarted: "docs/getting-started.md",
+        runnableProjectsDoc: "docs/runnable-projects.md",
+        projectStatus: "docs/project-status.md",
+      },
+      categories: CATEGORIES,
+      agents,
+      generatedAt: new Date().toISOString(),
+    },
     null,
     2,
   ),
