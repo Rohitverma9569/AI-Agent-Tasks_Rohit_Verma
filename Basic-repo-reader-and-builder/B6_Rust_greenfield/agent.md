@@ -40,7 +40,7 @@ cargo test
 cargo run -- sample.log
 ```
 
-Capture evidence in `validation-results.md`.
+Capture evidence in `validation-results.md` and `local-testing.md`.
 
 ## Rules
 

@@ -41,7 +41,7 @@ curl http://127.0.0.1:18080/health
 
 Expected health response: `{"status":"ok"}`
 
-Local verification record: [`Infra-and-DevOps/D4_Kubernetes_Deployment/docs/run-status.md`](../../../Infra-and-DevOps/D4_Kubernetes_Deployment/docs/run-status.md)
+Local verification: [local-testing.md](../local-testing.md) · [validation-results.md](../validation-results.md) · [STATUS.md](../STATUS.md)
 
 ## Teardown
 

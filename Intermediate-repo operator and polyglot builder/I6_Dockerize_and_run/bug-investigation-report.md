@@ -4,6 +4,7 @@
 > **Bug:** `GET byUserId` returns default values instead of 404 for missing user
 > **Generated:** 2026-06-17
 > **Status:** Fixed (verified by unit tests)
+> **Project status:** [STATUS.md](./STATUS.md)
 
 ---
 

@@ -49,7 +49,7 @@ tests/
 
 ## Validation
 
-Always run and capture evidence in `validation-results.md`:
+Always run and capture evidence in `validation-results.md` and `local-testing.md`:
 
 ```bash
 cd Basic-repo-reader-and-builder/B5_Node.js_greenfield_API
@@ -58,16 +58,18 @@ npm test
 npm start
 ```
 
+Manual curl tests must use **`http://localhost:3000`** (not `127.0.0.1`) — see [local-testing.md](./local-testing.md).
+
 ## Rules
 
 * Must include minimum 3 tests.
-* Show evidence of execution in `validation-results.md`.
+* Show evidence of execution in `validation-results.md` and `local-testing.md`.
 * Never claim tests passed without terminal output.
 
 ## Invocation examples
 
 ```
-/nodejs-builder — run npm test and update validation-results.md
+/nodejs-builder — run npm test and update validation-results.md and local-testing.md
 ```
 
 ```

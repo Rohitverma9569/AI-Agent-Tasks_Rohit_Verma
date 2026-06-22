@@ -274,7 +274,7 @@ These are **separate** from the catalog setup. Start them when you want to test 
 
 | Project | Start command | Port |
 | ------- | ------------- | ---- |
-| B4 FastAPI | `cd Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service && uvicorn app.main:app --reload` | 8000 |
+| B4 FastAPI | `cd Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service && uvicorn app.main:app --reload --host 127.0.0.1 --port 8001` | 8001 |
 | B5 Node API | `cd Basic-repo-reader-and-builder/B5_Node.js_greenfield_API && npm start` | 3000 |
 | B6 Rust CLI | `cd Basic-repo-reader-and-builder/B6_Rust_greenfield && cargo run -- sample.log` | — |
 | A3 Fraud system | `cd Advanced-parallel…/A3_Fraud_Score_system && ./scripts/run-all.sh` | 8000, 3001 |

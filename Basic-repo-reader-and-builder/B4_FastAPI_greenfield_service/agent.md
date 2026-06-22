@@ -61,6 +61,8 @@ B4_FastAPI_greenfield_service/
 │   └── test_transactions.py
 ├── requirements.txt
 ├── README.md
+├── STATUS.md
+├── local-testing.md
 └── validation-results.md
 ```
 
@@ -74,26 +76,35 @@ Minimum pytest coverage:
 
 ## Validation
 
-Always run and capture evidence in `validation-results.md`:
+Always run and capture evidence in `validation-results.md` and `local-testing.md`:
 
 ```bash
 cd Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service
 source .venv/bin/activate
 pytest -v
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8001
 ```
+
+Use port **8001** when I4 occupies **8000**. Confirm service identity:
+
+```bash
+curl -s http://127.0.0.1:8001/ | grep service
+# "service":"Transaction API"
+```
+
+Document manual curl results in [local-testing.md](./local-testing.md).
 
 ## Rules
 
 * Do not skip tests.
-* Show actual execution results in `validation-results.md`.
+* Show actual execution results in `validation-results.md` and `local-testing.md`.
 * Keep code in `app/` and tests in `tests/` — no stray scripts unless requested.
 * Never claim tests passed without terminal evidence.
 
 ## Invocation examples
 
 ```
-/fastapi-builder — run pytest and update validation-results.md
+/fastapi-builder — run pytest and update validation-results.md and local-testing.md
 ```
 
 ```

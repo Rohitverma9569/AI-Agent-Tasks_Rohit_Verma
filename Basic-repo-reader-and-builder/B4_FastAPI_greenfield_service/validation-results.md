@@ -1,8 +1,9 @@
 # Validation Results
 
 > **Project:** `Basic-repo-reader-and-builder/B4_FastAPI_greenfield_service`
-> **Generated:** 2026-06-17
+> **Generated:** 2026-06-22
 > **Method:** Executed pytest and live uvicorn + curl.
+> **Local test guide:** [local-testing.md](./local-testing.md)
 
 ---
 
@@ -18,6 +19,8 @@ pytest -v
 
 **Exit Code:** `0`
 
+**Last run:** 2026-06-22 · rohitverma · PMLMBT4677
+
 **Output:**
 
 ```
@@ -25,20 +28,50 @@ pytest -v
 platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0
 collected 5 items
 
-tests/test_transactions.py::test_create_transaction PASSED
-tests/test_transactions.py::test_get_transactions PASSED
-tests/test_transactions.py::test_get_balance PASSED
-tests/test_transactions.py::test_create_transaction_validation_error PASSED
-tests/test_transactions.py::test_create_transaction_default_timestamp PASSED
+tests/test_transactions.py::test_create_transaction PASSED                        [ 20%]
+tests/test_transactions.py::test_get_transactions PASSED                          [ 40%]
+tests/test_transactions.py::test_get_balance PASSED                               [ 60%]
+tests/test_transactions.py::test_create_transaction_validation_error PASSED       [ 80%]
+tests/test_transactions.py::test_create_transaction_default_timestamp PASSED      [100%]
 
-========================= 5 passed, 1 warning in 0.05s =========================
+============================= 5 passed, 1 warning in 0.04s ==============================
 ```
 
 **Result:** `PASSED`
 
 ---
 
-## uvicorn
+## Manual curl (2026-06-22 session)
+
+| Field | Value |
+| ----- | ----- |
+| Port | `8001` |
+| Verified | 2026-06-22 · rohitverma · PMLMBT4677 |
+| Full details | [local-testing.md §3](./local-testing.md#3-curl-session-capture-2026-06-22) |
+
+### Service identity
+
+**Output:** `"service":"Transaction API"`
+
+**Result:** `PASSED`
+
+### Happy path
+
+| Request | Captured response | Result |
+| ------- | ----------------- | ------ |
+| `GET /health` | `{"status":"ok"}` | ✅ PASSED |
+| `POST credit 100` | 201 + auto `id` and `timestamp` | ✅ PASSED |
+| `POST debit 50` | 201 + auto `id` and `timestamp` | ✅ PASSED |
+| `GET /transactions` | 4 transactions listed | ✅ PASSED |
+| `GET /balance` | `{"balance":100.0,"transaction_count":4}` | ✅ PASSED |
+
+> Balance: credits (100+100) − debits (50+50) = **100**
+
+**Result:** `PASSED`
+
+---
+
+## uvicorn (2026-06-17 reference run)
 
 **Command:**
 
@@ -83,3 +116,13 @@ INFO:     127.0.0.1:50025 - "GET /health HTTP/1.1" 200 OK
 ```
 
 **Result:** `PASSED`
+
+---
+
+## Summary
+
+| Check | Result |
+| ----- | ------ |
+| pytest (5 tests) | ✅ PASSED |
+| Manual curl — port 8001 (2026-06-22) | ✅ PASSED |
+| uvicorn + curl (2026-06-17, port 8765) | ✅ PASSED |
