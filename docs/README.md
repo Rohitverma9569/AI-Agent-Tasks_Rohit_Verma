@@ -1,4 +1,4 @@
-# AI Agent Tasks — Documentation Hub
+# AI Agent Tasks — Documentation
 
 The **AI Agent Tasks** repository — **24 Cursor agents** across four skill tiers, plus runnable demo projects, validation evidence, and a deployed web catalog.
 
@@ -600,6 +600,10 @@ docker-compose up -d --build
 - **Grafana home** → [http://localhost:3000](http://localhost:3000)
 - **Prometheus UI** → [http://localhost:9090](http://localhost:9090)
 - **Prometheus targets** → [http://localhost:9090/targets](http://localhost:9090/targets) · expect `d6-demo-api` **UP**
+
+![D6 FastAPI Observability — Grafana dashboard](../Infra-and-DevOps/D6_Observability_bolt_on_with_metrics/docs/evidence/grafana-d6-fastapi-dashboard-overview.png)
+
+*Grafana panels after load test — [open screenshot](../Infra-and-DevOps/D6_Observability_bolt_on_with_metrics/docs/evidence/grafana-d6-fastapi-dashboard-overview.png) if preview does not render.*
 
 ### 📡 App endpoints
 
